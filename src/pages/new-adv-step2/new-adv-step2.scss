@@ -1,0 +1,40 @@
+page-new-adv-step2 {
+
+  ion-textarea textarea {
+    height: 10em;
+  }
+
+  #map {
+       width: 100%;
+       height: 20em;
+  }
+
+  .sub {
+    padding: 0px !important;
+  }
+
+  .sub .toolbar-title {
+    color: color($colors, light) !important;
+  }
+
+  .buble{
+    width: 2em;
+    height: 2em;
+    border-color: color($colors, light);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2em;
+    text-align: center;
+    padding-top: 0.25em;
+  }
+
+  .done{
+    background-color: color($colors, primary);
+  }
+
+  ion-select{
+    padding: 11px 8px 8px 0px !important;
+    width: 100%;
+    max-width: 100%;
+  }
+}

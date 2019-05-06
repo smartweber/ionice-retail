@@ -1,0 +1,169 @@
+<!--
+  Generated template for the AdventureDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Adventure Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row class="updated-info">
+    <ion-col>
+      <img [src]="adventure.postedBy.profileImage ? adventure.postedBy.profileImage.url : 'assets/imgs/defaultImage.png'" class="img-circle">
+      <div>
+        <p>{{adventure.postedBy.name}}</p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12 *ngFor="let img of adventure.images ; let i = index">
+      <img [src]="img.secure_url" imageViewer (tap)="isShownImgViewer = true ; selectedIndex = i">
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-row>
+    <ion-col class="slider">
+      <ion-slides pager [initialSlide]="selectedIndex">
+        <ion-slide *ngFor="let img of adventure.images">
+          <img [src]="img.secure_url" imageViewer (tap)="isShownImgViewer = true ; selectedIndex = i">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row> -->
+  <ion-row align-items-center padding-horizontal>
+    <ion-col text-left>
+      <h4>{{adventure.title}}</h4>
+      <h2 class="price" ion-text color="tr-blue-c">${{adventure.price}}</h2>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center padding-horizontal *ngIf="!preview">
+    <ion-col col-8 text-center>
+      <button round full ion-button icon-left color="rt-blue" (tap) = "messsageSeller()">
+        <ion-icon name="ios-chatboxes-outline"></ion-icon>
+        MESSAGE SELLER
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+    Description
+    </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue" class="desc">
+        {{adventure.description}}
+      </p>
+    </ion-col>
+  </ion-row>
+
+
+  <!-- <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+        Posted on
+      </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        {{adventure.location.address}}
+      </p>
+    </ion-col>
+  </ion-row> -->
+
+  <!-- <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+        Seller
+      </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        {{adventure.postedBy.name}}
+      </p>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+        Location
+      </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        {{adventure.location.address}}
+      </p>
+    </ion-col>
+    <ion-col col-12>
+      <div #map id="map"></div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+    Duration
+    </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        {{adventure.duration}} Days
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+    Intensity
+    </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        {{adventure.intensity}}
+      </p>
+    </ion-col>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <ion-col col-12>
+      <h4 ion-text color="primary">
+    Category
+    </h4>
+    </ion-col>
+    <ion-col col-12>
+      <p ion-text color="rt-blue">
+        <span> {{adventure.category.level_1.name}} >  {{adventure.category.level_2.name}} >  {{adventure.category.level_3.name}}  </span>
+      </p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<div class="img-viewer" *ngIf="isShownImgViewer">
+
+  <ion-navbar>
+    <button ion-button clear color="light" icon-start (click)="isShownImgViewer = false">
+      <ion-icon name="ios-arrow-back"></ion-icon>
+      <span>Back</span>
+    </button>
+  </ion-navbar>
+
+  <ion-slides pager [initialSlide]="selectedIndex" #slider>
+
+    <ion-slide *ngFor="let img of adventure.images">
+      <img [src]="img.secure_url" #imageToView (tap)="onClick(imageToView)">
+    </ion-slide>
+
+  </ion-slides>
+</div>

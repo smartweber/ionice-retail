@@ -1,0 +1,72 @@
+<!--
+  Generated template for the AboutContactPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Contact Us</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <!-- <img src="assets/imgs/au1.jpg" /> -->
+    <ion-card-content>
+      <ion-card-title>
+        Think of us as your life jacket.
+      </ion-card-title>
+      <p>
+        Whether you need help with the site, a transaction, or advice on some gear, the ReelTrail team is ready to dive in and help.
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <!-- <img src="assets/imgs/au1.jpg" /> -->
+    <ion-card-content>
+      <ion-card-title>
+        Email Support
+      </ion-card-title>
+      <p>
+        Need to speak to a ReelTrail team member? Email us at support@reeltrail.com.
+      </p>
+      <ion-row justify-content-center padding-horizontal *ngIf="!preview">
+        <ion-col col-10 text-center>
+          <button round full ion-button icon-left color="rt-blue" (tap) = "email()">
+            <ion-icon name="ios-chatboxes-outline"></ion-icon>
+            EMAIL REELTRAIL
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <!-- <img src="assets/imgs/au1.jpg" /> -->
+    <ion-card-content>
+      <ion-card-title>
+        General Feedback
+      </ion-card-title>
+      <p>
+        Do you have any other questions or comments about ReelTrail? Send us feedback to info@reeltrail.com.
+      </p>
+      <ion-row justify-content-center padding-horizontal *ngIf="!preview">
+        <ion-col col-10 text-center>
+          <button round full ion-button icon-left color="rt-blue" (tap) = "feedback()">
+            <ion-icon name="ios-paper-outline"></ion-icon>
+            SEND FEEDBACK
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+
+</ion-content>

@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "./androidCert/reeltrail.keystore",
+            "storePassword": "reeltrail",
+            "alias": "reeltrail",
+            "password" : "reeltrail",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "./androidCert/reeltrail.keystore",
+            "storePassword": "reeltrail",
+            "alias": "reeltrail",
+            "password" : "reeltrail",
+            "keystoreType": ""
+        }
+    }
+}

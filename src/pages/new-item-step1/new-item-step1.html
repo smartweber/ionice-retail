@@ -1,0 +1,165 @@
+<!--
+  Generated template for the NewItemStep1Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-buttons start>
+      <button ion-button icon-only color="royal" (tap)="dismiss()">
+        <ion-icon name="ios-arrow-back"></ion-icon> Back
+      </button>
+    </ion-buttons>
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-row justify-content-center>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          1
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble">
+          2
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble">
+          3
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble">
+          4
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar no-border-top color="rt-blue" class="divider-line">
+    <hr>
+  </ion-toolbar>
+  <ion-toolbar no-border-top color="rt-blue" text-center no-padding>
+    <p>
+      <strong>List for Free</strong>
+    </p>
+    <p>We've got your back with seller protection on all listings.</p>
+    <ng-container *ngIf="more">
+      <p>
+        <strong>The lowest fees around:</strong>
+      </p>
+      <p>
+        <ion-icon name="checkmark"></ion-icon>
+        <span>7.5% selling fee</span>
+      </p>
+      <p>
+        <ion-icon name="checkmark"></ion-icon>
+        <span>2.9% + $0.25 payment processing fee</span>
+      </p>
+    </ng-container>
+    <ng-container *ngIf="!more">
+      <div text-center style="background: white;">
+        <ion-badge color="rt-blue" style="border-top-left-radius: 0px;border-top-right-radius: 0px;" (click)="more=true"> More info</ion-badge>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="more">
+      <div text-center style="background: white;">
+        <ion-badge color="rt-blue" style="border-top-left-radius: 0px;border-top-right-radius: 0px;" (click)="more=false"> Less info</ion-badge>
+      </div>
+    </ng-container>
+  </ion-toolbar>
+</ion-header>
+<ion-content> 
+  <input [hidden]="true" type="file" #fileEl (change)="fileChange($event)" />
+  <!-- <ion-row justify-content-center>
+    <ion-col col-2 text-center *ngIf="!mobileWeb">
+      <button ion-button icon-only color="rt-blue" (tap)="takePicture()">
+        <ion-icon name="ios-camera-outline"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-2 text-center>
+      <button ion-button icon-only color="rt-blue" (tap)="selectPicture()">
+        <ion-icon name="ios-image-outline"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row> -->
+
+  <form [formGroup]="step1Form" (ngSubmit)="next(step1Form.value)">
+
+    <ion-list>
+      <ion-list-header>
+          LISITNG TITLE (Ex: Brand + Model + Size)
+      </ion-list-header>
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Item Name</ion-label> -->
+        <ion-input [class.form-invalid]="!step1Form.controls.title.valid" color="rt-blue-c" formControlName="title" type="text" placeholder="Item Title (required)"
+          autocapitalize="sentences"></ion-input>
+      </ion-item>
+
+      <ion-list-header>
+        Set Item Categories
+      </ion-list-header>
+
+      <ion-item>
+        <!-- <ion-label color="primary" >Main Category</ion-label> -->
+        <ion-select [class.form-invalid]="!step1Form.controls.mainCategory.valid" formControlName="mainCategory" (ionChange)="mainChanged()"
+          [selectOptions]="catOpt1" placeholder="Main Category (required)">
+          <ng-container *ngFor="let cat of mainCat">
+            <ion-option *ngIf="cat.link!='adventures'" [value]="cat._id">{{cat.name}}</ion-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" >Sub Category</ion-label> -->
+        <ion-select [class.form-invalid]="!step1Form.controls.subcategory1.valid" [disabled]="step1Form.controls.mainCategory.value == ''"
+          formControlName="subcategory1" (ionChange)="subChanged()" [selectOptions]="catOpt2" placeholder="Sub Category (required)">
+          <ion-option *ngFor="let cat of subCat" [value]="cat._id">{{cat.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" >Sub Sub Category</ion-label> -->
+        <ion-select [class.form-invalid]="!step1Form.controls.subcategory2.valid" [disabled]="step1Form.controls.subcategory1.value == ''"
+          formControlName="subcategory2" (ionChange)="subSubChanged()" [selectOptions]="catOpt3" placeholder="Sub Sub Category (required)">
+          <ion-option *ngFor="let cat of subSubCat" [value]="cat._id">{{cat.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+    </ion-list>
+    <ion-row>
+      <ng-container *ngIf="images && images.length > 0">
+        <ion-col col-3 class="uploaded" *ngFor="let img of images" [style.background]="thumbnail(img)">
+          <button class="delete" ion-button icon-only color="danger" (tap)="delete(img)">
+            <ion-icon name="ios-trash-outline"></ion-icon>
+          </button>
+        </ion-col>
+      </ng-container>
+      <ion-col col-3 *ngIf="!images || (images && images.length<maxPhotos)">
+        <div class="button-select" (click)="showFooter()">
+          <p>+</p>
+          <p>Photos</p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row justify-content-center>
+      <ion-col col-8 text-center>
+        <button [disabled]="!step1Form.valid" type="submit" round ion-button full>NEXT</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>
+
+<ion-footer *ngIf="isShowFooter">
+  <ion-list>
+    <button (click)="takePicture()">Take Photo</button>
+    <button (click)="selectPicture()">Choose Existing</button>
+    <button (click)="isShowFooter = false">Cancel</button>
+  </ion-list>
+</ion-footer>

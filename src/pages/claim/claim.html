@@ -1,0 +1,62 @@
+<!--
+  Generated template for the ProfileEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>SUBMIT CLAIM</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="claimForm" (ngSubmit)="submit(claimForm.value)">
+
+    <ion-list>
+      <ion-item wrap-text>
+        Having a problem with your order?
+        <p>We're here to help! In the form below, please describe the issue you're having with your item or order.
+          Once you click Submit, we will review the details and follow up with you with next steps.</p>
+        <p>You can also feel free to contact the seller directly to initiate arrangements if you'd like. You can
+          contact them directly using the "Contact Seller" button from the order on your account.</p>        
+      </ion-item>
+      <ion-item>
+        Sale ID
+        <p>{{order_id}}</p>
+      </ion-item>
+      <ion-item>
+        Gear
+        <p>{{item.title}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-input color="rt-blue-c" formControlName="item" type="text" placeholder="What item was it?" autocapitalize="words"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label ion-text color="primary" floating>Problem Type</ion-label>
+        <ion-select formControlName="problemType" [selectOptions]="aSOpts">
+          <ion-option value="Item Not Received">Item Not Received</ion-option>
+          <ion-option value="Item Not As Described">Item Not As Described</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-textarea color="rt-blue-c" formControlName="description" placeholder="How did it not meet your expectation?"
+          autocapitalize="words"></ion-textarea>
+        <p>Tell us how the item didn't meet your expectation</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-6>
+        <button [disabled]="!claimForm.valid" type="submit" block round ion-button>UPDATE</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+
+
+</ion-content>

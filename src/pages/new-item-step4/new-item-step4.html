@@ -1,0 +1,168 @@
+<!--
+  Generated template for the NewItemstep4Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-row justify-content-center>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          1
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          2
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          3
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          4
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-title class="sub">Choose listing options</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      Listing Preview
+    </ion-list-header>
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img *ngIf="prevData.images" [src]="prevData.images[0].url">
+      </ion-thumbnail>
+      <h2>{{prevData.title}}</h2>
+      <p>{{category}}</p>
+      <ion-note item-end>
+        {{price|currency:'USD'}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ion-row>
+    <ion-list *ngFor="let option of options">
+      <ion-list-header>
+        {{option.name}} +{{option.price|currency:'USD'}}
+      </ion-list-header>
+      <ion-item text-wrap>
+        <ion-label>{{option.description}}</ion-label>
+        <ion-checkbox [disabled]="option.disabled" [(ngModel)]="option.selected" (ionChange)="update(option)" color="primary"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </ion-row>
+  <ng-container *ngIf="(!discount || discount==0) && total>0">
+    <ion-item>
+      Do you have a coupon?
+    </ion-item>
+    <ion-row>
+      <ion-col col-8>
+        <ion-item>
+          <ion-input color="rt-blue-c" placeholder="Enter the coupon code here" [(ngModel)]="voucher" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-4>
+        <button color="rt-blue-c" (tap)="apply()" [disabled]="!voucher || applying" round ion-button full>
+          <ion-spinner name="bubbles" *ngIf="applying"></ion-spinner>
+          <ng-container *ngIf="!applying"> Add</ng-container>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+  <ng-container *ngIf="discount && discount>0">
+    <ion-row justify-content-center padding-horizontal *ngIf="total > 0">
+      <ion-col text-left>
+        Sub Total
+      </ion-col>
+      <ion-col text-right>
+        <h5 no-margin ion-text color="primary">{{total|currency:'USD'}}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center padding-horizontal *ngIf="total > 0">
+      <ion-col text-left>
+        Voucher ~ {{voucher}}
+      </ion-col>
+      <ion-col text-right>
+        <h5 no-margin ion-text color="primary">{{discount|currency:'USD'}}</h5>
+      </ion-col>
+    </ion-row>
+  </ng-container>
+  <ion-row justify-content-center padding-horizontal *ngIf="total > 0">
+    <ion-col text-left>
+      <h2 no-margin ion-text color="primary">Total</h2>
+    </ion-col>
+    <ion-col text-right>
+      <h2 no-margin ion-text color="primary">{{ (total-discount)|currency:'USD'}}</h2>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row justify-content-center *ngIf="!loggedIn">
+    <ion-col col-12>
+      <ion-card>
+        <ion-card-content text-center text-wrap justify-content-center>
+          <ion-col col-12 text-center ion-text color="primary">
+            You are almost there! Please join ReelTrail to continue with your listing.
+          </ion-col>
+          <ion-col col-12 text-center>
+            <button (tap)="join()" round ion-button full>REGISTER</button>
+            <!-- <button (tap)="list(step4Form.value)" [disabled]="updateCheck() || isEmpty(primaryAddress) || bankLast4 == ''"  round ion-button full *ngIf="loggedIn && confirmed">LIST</button> -->
+            <!-- <button (tap)="login()" round ion-button full *ngIf="!loggedIn || !confirmed">Login</button> -->
+          </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center *ngIf="loggedIn && !hasFunding">
+    <ion-col col-12>
+      <ion-card>
+        <ion-card-content text-center text-wrap justify-content-center>
+          <ion-col col-12 text-center ion-text color="primary">
+            You are one step away from listing your gear. Please choose your funding preference so you can get paid when your gear sells!
+          </ion-col>
+          <ion-col col-12 text-center>
+            <button (tap)="addFunding()" round ion-button full>ADD FUNDING</button>
+            <!-- <button (tap)="list(step4Form.value)" [disabled]="updateCheck() || isEmpty(primaryAddress) || bankLast4 == ''"  round ion-button full *ngIf="loggedIn && confirmed">LIST</button> -->
+            <!-- <button (tap)="login()" round ion-button full *ngIf="!loggedIn || !confirmed">Login</button> -->
+          </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+
+
+
+  <ion-row justify-content-center *ngIf="loggedIn && hasFunding">
+    <ion-col col-6 text-center>
+      <button type="button" (click)="goBack()" round ion-button full>BACK</button>
+    </ion-col>
+    <ion-col col-6 text-center>
+      <button (tap)="list()" round ion-button full>LIST GEAR</button>
+      <!-- <button (tap)="list(step4Form.value)" [disabled]="updateCheck() || isEmpty(primaryAddress) || bankLast4 == ''"  round ion-button full *ngIf="loggedIn && confirmed">LIST</button> -->
+      <!-- <button (tap)="login()" round ion-button full *ngIf="!loggedIn || !confirmed">Login</button> -->
+    </ion-col>
+  </ion-row>
+
+
+
+</ion-content>

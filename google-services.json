@@ -1,0 +1,131 @@
+{
+  "project_info": {
+    "project_number": "400447973316",
+    "firebase_url": "https://reeltrail-27498.firebaseio.com",
+    "project_id": "reeltrail-27498",
+    "storage_bucket": "reeltrail-27498.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400447973316:android:2a40472c84859285",
+        "android_client_info": {
+          "package_name": "com.reeltrail.rtappmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400447973316-500ap7g03jtp93esv5d6aau36j5jui7i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reeltrail.rtappmobile",
+            "certificate_hash": "a6deef1207bb7e9ef4fd60871002fb0aaf0cee08"
+          }
+        },
+        {
+          "client_id": "400447973316-o792d1ieib2h0uqdqkn5h0g054ujmddv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reeltrail.rtappmobile",
+            "certificate_hash": "2046fdd5c4d5641372ee0a5db6baf784a4a032aa"
+          }
+        },
+        {
+          "client_id": "400447973316-dic3jjsljdq5euanl7gku87uolp4k1s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzGAH1oALRpVIQwHWclW5HfI1giWYE31c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400447973316-8i8uf1qmio29i77spnsfs3balrfug00k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "400447973316-g1alm4je1k9kkclh6g2rrijf2onb5pbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reeltrail.rtappmobile",
+                "app_store_id": "1244995948"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400447973316:android:ff6844e4e1702348",
+        "android_client_info": {
+          "package_name": "com.reeltrail.rtmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400447973316-u634l8gd19heacjg5h7ir70pu4i4k4v2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reeltrail.rtmobile",
+            "certificate_hash": "2046fdd5c4d5641372ee0a5db6baf784a4a032aa"
+          }
+        },
+        {
+          "client_id": "400447973316-07sgvaqrujtt4koh800rk5u650ikiglp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reeltrail.rtmobile",
+            "certificate_hash": "a6deef1207bb7e9ef4fd60871002fb0aaf0cee08"
+          }
+        },
+        {
+          "client_id": "400447973316-dic3jjsljdq5euanl7gku87uolp4k1s8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzGAH1oALRpVIQwHWclW5HfI1giWYE31c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400447973316-8i8uf1qmio29i77spnsfs3balrfug00k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "400447973316-g1alm4je1k9kkclh6g2rrijf2onb5pbr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.reeltrail.rtappmobile",
+                "app_store_id": "1244995948"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

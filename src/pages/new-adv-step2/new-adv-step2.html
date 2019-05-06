@@ -1,0 +1,191 @@
+<!--
+  Generated template for the NewAdvstep2Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>NEW ADVENTURE</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-row justify-content-center>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          1
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          2
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble">
+          3
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-title class="sub">Describe your adventure</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <form [formGroup]="step2Form" (ngSubmit)="next(step2Form.value)">
+
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img *ngIf="prevData.images" [src]="prevData.images[0].url">
+      </ion-thumbnail>
+      <h2>{{prevData.title}}</h2>
+      <p>{{category}}</p>
+      <ion-note item-end>
+        <!-- {{(item.ourPrice|currency:'USD'}} -->
+      </ion-note>
+    </ion-item>
+
+
+    <ion-list>
+
+      <ion-list-header>
+        Adventure Price
+      </ion-list-header>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <!-- <ion-label color="primary" fixed>Adventure Price</ion-label> -->
+            <ion-input [class.form-invalid]="!step2Form.controls.price.valid" placeholder="Adventure Price (required)"  color="rt-blue-c" formControlName="price"  [type]="platform.is('android') ? 'number':'text'" pattern="[0-9]*"  money-input-mask [masker]="{money: true, thousand: '',numeric:true,  decimalCaracter: '.', decimal: '2'}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Adventure Duration and Intensity
+      </ion-list-header>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <!-- <ion-label color="primary" fixed>How many Days?</ion-label> -->
+            <ion-input [class.form-invalid]="!step2Form.controls.duration.valid" placeholder="How many Days? (required)" color="rt-blue-c" formControlName="duration" [type]="platform.is('android') ? 'number':'text'" pattern="[0-9]*"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-12>
+          <ion-item>
+            <!-- <ion-label color="primary" floating >Intensity</ion-label> -->
+            <ion-select [class.form-invalid]="!step2Form.controls.intensity.valid" formControlName="intensity"  [selectOptions]="intOpts" placeholder="Intensity (required)">
+              <ion-option value=1>1</ion-option>
+              <ion-option value=2>2</ion-option>
+              <ion-option value=3>3</ion-option>
+              <ion-option value=4>4</ion-option>
+              <ion-option value=5>5</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Group Adventure?
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Group Adventure</ion-label>
+        <ion-checkbox color="primary" formControlName="isGroup"></ion-checkbox>
+      </ion-item>
+
+      <ion-row *ngIf="step2Form.controls['isGroup'].value">
+        <ion-col col-6>
+          <ion-item>
+            <!-- <ion-label color="primary" floating>Min people required</ion-label> -->
+            <ion-input placeholder="Min people (required)"  color="rt-blue-c" formControlName="groupSizeMin" type="tel"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <!-- <ion-label color="primary" floating>Max people required</ion-label> -->
+            <ion-input placeholder="Max people (required)" color="rt-blue-c" formControlName="groupSizeMax" type="tel"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+
+
+    <ion-row justify-content-center >
+      <ion-col col-12 text-center>
+        <h2 ion-text color="Primary">
+          Adventure Location
+        </h2>
+      </ion-col>
+    </ion-row>
+
+    <div #map id="map"></div>
+
+    <ion-searchbar
+      autocorrect="on" [class.form-invalid]="!step2Form.controls.autocompleteText.valid"
+      [placeholder] = "placeholder"
+      formControlName="autocompleteText"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+
+    <ion-list *ngIf="predictions && predictions.length > 0">
+      <ion-item *ngFor="let place of predictions" (tap)="detail(place)">
+        <p>{{place.description}}</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-list padding-top>
+      <ion-list-header >
+        Adventure Description
+      </ion-list-header>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Description</ion-label> -->
+        <ion-textarea autocorrect="on" [class.form-invalid]="!step2Form.controls.description.valid" placeholder="Description (required)" class="textarea" color="rt-blue-c" formControlName="description" type="text"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Youtube link</ion-label> -->
+        <ion-input placeholder="Youtube link (optional)"  color="rt-blue-c" formControlName="youtubelink" type="text" autocapitalize="off"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+
+    <ion-list >
+      <ion-list-header >
+        Listing Duration ($1.00 per Day, Unlimited Days)
+      </ion-list-header>
+      <ion-col >
+        <ion-item>
+          <!-- <ion-label color="primary" fixed>Listing Days</ion-label> -->
+          <ion-input [class.form-invalid]="!step2Form.controls.listingDays.valid" placeholder="Listing Days (required)" color="rt-blue-c" formControlName="listingDays" type="tel"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-6 text-center>
+        <button type="button" (click)="goBack()" round ion-button full>BACK</button>
+      </ion-col>
+      <ion-col col-6 text-center>
+        <button  [disabled]="!step2Form.valid" type="submit" round ion-button full>NEXT</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+
+</ion-content>

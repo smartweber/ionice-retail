@@ -1,0 +1,82 @@
+<!--
+  Generated template for the SubscriptionPayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>NEW SUBSCRIPTION</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+  <ion-item *ngIf="subscription != null">
+    <ion-avatar item-start>
+      <img [src]="subscription.badgeImage.secure_url">
+    </ion-avatar>
+    <h2>{{subscription.name}}</h2>
+    <p>{{subscription.price|currency:'USD'}}/Month</p>
+    <p>{{subscription.percentage}}% Transaction fee</p>
+    <ion-note item-end>
+      <button ion-button color="primary" round (tap) = "changeSubscription()">Change</button>
+    </ion-note>
+  </ion-item>
+
+  <ion-row justify-content-center *ngIf="subscription != null">
+    <ion-col text-center>
+      <h3 ion-text color="rt-blue-c">Payment Summary</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center padding-horizontal class = "highlight" padding-vertical>
+    <ion-col text-left>
+      <b><span>Subscription Fee/Month</span></b>
+    </ion-col>
+    <ion-col text-right>
+      <span>{{subscription.price|currency:'USD'}}</span>
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center padding-horizontal>
+    <ion-col text-left>
+      <span>Tax</span>
+    </ion-col>
+    <ion-col text-right>
+      <span>$0.00</span>
+    </ion-col>
+  </ion-row>
+  <ion-row justify-content-center padding-horizontal *ngIf="subscription != null">
+    <ion-col text-left>
+      <span ion-text color="primary">Total</span>
+    </ion-col>
+    <ion-col text-right>
+      <span ion-text color="primary">{{subscription.price|currency:'USD'}}</span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center>
+      <ion-col id="paymentPanel"></ion-col>
+  </ion-row>
+  <ion-row justify-content-center>
+    <ion-col>
+      <ion-item no-lines text-center>
+          <a (tap)="goServiceAgreement()">ReelTrail's Terms & Conditions</a>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+
+  <ion-row justify-content-center padding-top>
+    <ion-col col-6 text-center>
+      <button round full ion-button icon-left color="primary" (tap)="enroll()"> 
+        ENROLL
+      </button>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

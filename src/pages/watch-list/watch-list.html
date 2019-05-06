@@ -1,0 +1,46 @@
+<!--
+  Generated template for the WatchListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>WATCH LIST</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 color="rt-blue-c" text-center *ngIf="items.length === 0">Oops, looks like you have not added any items to watch.</h4>
+
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let gear of items">
+      <ion-item text-wrap>
+        <ion-thumbnail item-start>
+          <img [src]="gear.thumbnail">
+        </ion-thumbnail>
+        <h2>{{gear.title}}</h2>
+        <p>{{gear.category.level_1.name}}&gt;{{gear.category.level_2.name}}&gt;{{gear.category.level_3.name}}</p>
+        <ion-note item-end>
+          {{gear.price|currency:'USD'}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="rt-orange" (tap)="unwatch(gear, slidingItem)">
+        <ion-icon name="ios-trash-outline"></ion-icon>
+        UNWATCH
+      </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,219 @@
+<!--
+  Generated template for the PurchaseOrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Purchase Order</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      Order Details
+    </ion-list-header>
+
+    <ion-item>
+      <ion-row>
+        <ion-col col-12>
+          <p>Order# {{order.order_id}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p> Order placed on {{order.createdAt|date:'mediumDate'}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list *ngFor="let order of order.shipping_orders">
+    <ion-list-header>Gear from {{order.merchant.name}}</ion-list-header>
+
+    <ion-item>
+      <ion-row>
+        <h3>Shipping Address</h3>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.name}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.street1}}</p>
+        </ion-col>
+        <ion-col col-12 *ngIf="order.ship_to_address.street2">
+          <p>{{order.ship_to_address.street2}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.city}}, {{order.ship_to_address.state}} {{order.ship_to_address.zip}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let item of order.line_items">
+      <ion-avatar item-start>
+        <img [src]="item.thumbnail">
+      </ion-avatar>
+      <h2>{{item.title}}</h2>
+      <p>{{item.price|currency:'USD'}}</p>
+      <p *ngIf="item.tracking_numbers.length == 0">Gear has not shipped</p>
+
+      <ng-container *ngFor="let tracking of item.tracking_numbers">
+        <ion-row>
+          <ion-col col-6 text-left>
+            <p>{{tracking.tracking}}</p>
+          </ion-col>
+          <ion-col col-6 text-right>
+            <p>{{tracking.carrier}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-left>
+            <ng-container *ngIf="tracking.status">
+              <br>
+              <span style="font-size:13px;">
+                <b>Carrier: </b>{{tracking.carrier}}<br>
+                <b>Status: </b>{{tracking.status.status}}<br>
+                <b>Status Detail: </b>{{tracking.status.status_details}}
+              </span>
+            </ng-container>
+            <p>
+              <button round small ion-button color="rt-green-b" *ngIf="tracking.label_url" (tap)="share(tracking)">
+                Share/Print Label
+              </button>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+
+      <ion-note item-end>qty:{{item.qty}}</ion-note>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Transaction Summary</ion-list-header>
+    <ion-item>
+      <!-- <ion-avatar item-start>
+        <img [src]="item.thumbnail">
+      </ion-avatar> -->
+
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Subtotal</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.subtotal|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Shipping</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.shipping|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Taxes</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.taxes|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <!--  <ion-row>
+        <ion-col col-6 text-left>
+          <p>Processing fee</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.processing_fee|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Total</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.total|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Payment</ion-list-header>
+    <ion-item text-wrap>
+      <ion-thumbnail item-start>
+        <img [src]="order.transaction_summary.payment_method.image">
+      </ion-thumbnail>
+
+      <h2>**** {{order.transaction_summary.payment_method.description}}</h2>
+      <p>{{order.transaction_summary.payment_method.type}}</p>
+      <ion-note item-end>{{order.transaction_summary.total|currency:'USD'}}</ion-note>
+    </ion-item>
+    <ion-item>
+      Having a problem with your order?
+      <p>
+        <button round small ion-button color="rt-green-b" (tap)="claim()">
+          Submit Claim
+        </button>
+      </p>
+    </ion-item>
+  </ion-list>
+  <ion-card *ngIf="feedback">    
+    <ng-container *ngIf="feedback.customer && feedback.customer.user && myEmail == feedback.customer.user.email">
+      <ion-list>
+        <ion-list-header>Feedback from {{feedback.merchant.user.name}}</ion-list-header>
+        <ion-item *ngIf="feedback.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="feedback.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{feedback.merchant.feedback}}</h2>
+          <ion-col col-auto *ngFor="let fb of valueArray(feedback.merchant.rating.rating)">
+              <ion-icon name="ios-star" color="rt-yellow"></ion-icon>
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray((5-feedback.merchant.rating.rating))">
+              <ion-icon name="ios-star-outline" color="rt-yellow"></ion-icon>
+            </ion-col>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <ion-item *ngIf="!feedback.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="feedback.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>No feedback given yet</h2>
+
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+      </ion-list>
+
+      <ion-list style="padding-top:1em;">
+        <ion-list-header>Feedback given to {{feedback.merchant.user.name}}</ion-list-header>
+        <ion-item *ngIf="feedback.customer.feedback">
+          <ion-avatar item-start>
+            <img [src]="feedback.customer.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{feedback.customer.feedback}}</h2>
+          <ion-col col-auto *ngFor="let fb of valueArray(feedback.customer.rating.rating)">
+              <ion-icon name="ios-star" color="rt-yellow"></ion-icon>
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray((5-feedback.customer.rating.rating))">
+              <ion-icon name="ios-star-outline" color="rt-yellow"></ion-icon>
+            </ion-col>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <button *ngIf="!feedback.customer.feedback" ion-item (tap)="sendFeedback()">
+          Give Feedback to {{feedback.merchant.user.name}}
+        </button>
+
+      </ion-list>
+    </ng-container>
+
+  </ion-card>
+</ion-content>

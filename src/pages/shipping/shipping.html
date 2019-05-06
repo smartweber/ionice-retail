@@ -1,0 +1,97 @@
+<!--
+  Generated template for the ShippingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>SHIPPING</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ng-container>
+
+    <ion-list>
+      <ion-list-header>
+        Ship To
+      </ion-list-header>
+      <ion-item>
+        <ion-row>
+          <ion-col col-12>
+            <p>{{order.ship_to_address.name}}</p>
+          </ion-col>
+          <ion-col col-12>
+            <p>{{order.ship_to_address.street1}}</p>
+          </ion-col>
+          <ion-col col-12 *ngIf="order.ship_to_address.street2">
+            <p>{{order.ship_to_address.street2}}</p>
+          </ion-col>
+          <ion-col col-12>
+            <p>{{order.ship_to_address.city}}, {{order.ship_to_address.state}} {{order.ship_to_address.zip}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center padding-horizontal>
+      <button round full ion-button icon-left color="rt-blue" (tap)="addTracking()">
+        <ion-icon name="ios-cube-outline"></ion-icon>
+        ADD TRACKING
+      </button>
+    </ion-row>
+
+
+    <ion-list *ngIf="item.tracking_numbers.length > 0">
+
+      <ion-list-header>
+        Tracking Numbers
+      </ion-list-header>
+      <ion-item-sliding *ngFor="let tracking of item.tracking_numbers" #slidingItem>
+        <ion-item text-wrap  (tap)="view(tracking)">
+          <h2>{{tracking.tracking}}</h2>
+          <ng-container *ngIf="tracking.status">
+            <br>
+            <span style="font-size:13px;">
+              <b>Carrier: </b>{{tracking.carrier}}<br>
+              <b>Status: </b>{{tracking.status.status}}<br>
+              <b>Status Detail: </b>{{tracking.status.status_details}}
+            </span>
+          </ng-container>
+        </ion-item>
+        <ion-item-options side="right">
+          <button round ion-button color="rt-green-b" *ngIf="tracking.label_url" (tap)="share(tracking)">
+            Share/Print Label
+          </button>
+          <!--
+          <button ion-button color="danger" (tap)="void(tracking, slidingItem)">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+          VOID
+        </button>
+
+          <button ion-button color="rt-orange" (tap)="showReturnLabel(tracking, slidingItem)">
+          <ion-icon name="ios-return-left-outline"></ion-icon>
+          RETURN LABEL
+        </button> -->
+
+        </ion-item-options>
+      </ion-item-sliding>
+
+
+
+    </ion-list>
+
+    <ion-row justify-content-center padding-horizontal>
+      <button round full ion-button icon-left color="rt-blue" (tap)="addShippingLabel()">
+        <ion-icon name="ios-cube-outline"></ion-icon>
+        BUY SHIPPING LABEL
+      </button>
+    </ion-row>
+
+  </ng-container>
+</ion-content>

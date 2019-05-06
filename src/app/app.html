@@ -1,0 +1,18 @@
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>{{title}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-list>
+            <button ion-item menuClose *ngFor="let c of categories" class="menu-item" (click)="open(title.toLowerCase(), c.page)">
+                <img [src]="'assets/categories/'+ c.icon" width="40">
+                <span>{{c.name}}</span>
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>

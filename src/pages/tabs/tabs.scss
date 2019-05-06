@@ -1,0 +1,16 @@
+// @Author: Ruben
+// @Date:   2017-12-05T15:42:46-07:00
+// @Last modified by:   Ruben
+// @Last modified time: 2017-12-05T15:43:45-07:00
+
+page-tabs {
+    ion-tabs.isKeyboardOpen {
+        .tabbar {
+            display: none;
+        }
+
+        .scroll-content {
+            margin-bottom: 0 !important;
+        }
+    }
+}

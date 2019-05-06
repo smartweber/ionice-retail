@@ -1,0 +1,36 @@
+<!--
+  Generated template for the NotificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>NOTIFICATIONS</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <h4 color="rt-blue-c" text-center *ngIf="notifications.length === 0">Oops, looks like you have not received any notifications.</h4>
+
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let notification of notifications" (tap) = "open(notification)">
+      <ion-item text-wrap>
+        <ion-icon color="rt-blue-c" name="ios-notifications-outline" item-start></ion-icon>
+        <h2 ion-text color="primary">{{notification.title}}</h2>
+        <p ion-text color="rt-blue-c" >{{notification.message}}</p>
+        <p ion-text color="rt-blue-c" >{{formatDate(notification.createdAt)}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (tap)="clear(notification, slidingItem)">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+          CLEAR
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

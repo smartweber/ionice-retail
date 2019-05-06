@@ -1,0 +1,82 @@
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Explore</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="openCart()">
+        <ion-icon name="ios-cart-outline">
+          <ion-badge *ngIf="counter > 0" id="notifications-badge" color="danger">{{counter}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color="rt-blue">
+    <ion-searchbar #searchBar [showCancelButton]="false" (input)="getItems($event)" (ionCancel)="onCancel($event)" (ionClear)="onCancel($event)"
+      placeholder="Search All Gear & Adventures" (search)="onSearch($event)" (ionBlur)="closeKeyboard()"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row justify-content-center padding-vertical *ngIf="loading">
+    <ion-col col-12 text-center>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-col>
+  </ion-row>
+  <ng-container *ngIf="!results">
+    <ion-row>
+      <ion-col>
+        <ion-card class="all-card" style="background-image: url(assets/imgs/sell_gear.jpg)" (tap)="open('gear', 'featured')">
+          <div class="card-title">FEATURED GEAR</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card class="all-card" style="background-image: url(assets/imgs/how-it-works-back.jpg)" (tap)="features()">
+          <div class="card-title">How It Works</div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <div class="list">
+      <div class="item" *ngFor="let c of mainCat">
+        <div class="item-title">
+          <div class="item-all">
+            <img [src]="'assets/categories/' + icons[c.link] || ''" width="20">
+            <span>{{c.name}}</span>
+          </div>
+          <span class="all-text" (tap)="open((c.link=='adventures' ?'adventures':'gear'), c._id, c.name)">All {{c.name}} ></span>
+        </div>
+        <div class="item-list">
+          <div class="list-item" *ngFor="let s of c.subcategories" (tap)="open((c.link=='adventures' ?'adventures':'gear'), ''+c._id+'/'+s._id,s.name)">
+            <img [src]="'assets/categories/' + icons[s.link] || ''" width="35">
+            <span>{{s.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="results">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-3 *ngFor="let item of results" (tap)="view(item)" class="fade-in">
+          <ion-card>
+            <div class="overlay">
+            </div>
+            <img [src]="item.thumbnail" />
+            <div class="card-title">{{item.title}}</div>
+            <div class="card-subtitle">
+              <span>${{item.price}}</span>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+</ion-content>

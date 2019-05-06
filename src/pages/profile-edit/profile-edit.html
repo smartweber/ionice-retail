@@ -1,0 +1,86 @@
+<!--
+  Generated template for the ProfileEditPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>EDIT PROFILE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-row class="head" justify-content-center>
+    <ion-col col-6 align-self-center text-center>
+      <ion-item no-lines text-center>
+        <ion-avatar text-center (tap)="changePicture()">
+          <img [src]="profileImg">
+        </ion-avatar>
+      </ion-item>
+      <button block round ion-button icon-left (tap)="changePicture()">
+        <!-- <ion-icon name="ios-cart-outline"></ion-icon> -->
+        Change
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <form [formGroup]="editForm" (ngSubmit)="update(editForm.value)">
+
+    <ion-list>
+      <ion-item>
+        <!-- <ion-label color="primary" floating>First Name</ion-label> -->
+        <ion-input color="rt-blue-c" formControlName="firstName" type="text" placeholder="First Name" autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary"  floating>Last Name</ion-label> -->
+        <ion-input formControlName="lastName" type="text" placeholder="Last Name" autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary"  floating>Username</ion-label> -->
+        <ion-input [disabled]="false" formControlName="storeName" type="text" placeholder="Store Name (required)"
+          autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item-group>
+        <ion-item-divider color="light">Primary Address</ion-item-divider>
+        <ng-container *ngIf="profile.primaryAddress">
+          <ion-item>{{profile.primaryAddress.street1}}</ion-item>
+          <ion-item>{{profile.primaryAddress.state}} {{profile.primaryAddress.city}} {{profile.primaryAddress.zip}} </ion-item>
+          <ion-item>
+              <button color="rt-blue-c" type="button" block round ion-button medium (tap)="goTo('AddressesPage')">CHANGE ADDRESS</button>  
+          </ion-item>
+        </ng-container>
+      </ion-item-group>
+      <ion-item>
+        <ion-checkbox color="dark" formControlName="newPass" checked='false'></ion-checkbox>
+        <ion-label>Want to set new password?</ion-label>
+      </ion-item>
+      <ion-item *ngIf="editForm.controls['newPass'].value==true">
+        <ion-input formControlName="oldPassword" type="password" placeholder="Enter Current Password" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf="editForm.controls['newPass'].value==true">
+        <ion-input formControlName="newPassword" type="password" placeholder="Enter New Password" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="editForm.controls['newPass'].value==true">
+        <ion-input formControlName="confirmPassword" type="password" placeholder="Enter Confirm Password" autocapitalize="off"></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+
+    <ion-row justify-content-center>
+      <ion-col col-6>
+        <button [disabled]="!editForm.valid" type="submit" block round ion-button>UPDATE</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+
+
+</ion-content>

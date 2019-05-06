@@ -1,0 +1,130 @@
+page-search {
+
+  #notifications-badge {
+           background-color: red;
+           position: absolute;
+           top: -3px;
+           right: -3px;
+           border-radius: 100%;
+           line-height: 9px;
+  }
+  ion-badge {
+    padding: 3px 5px;
+    font-size: 1.0rem;
+  }
+
+    ion-card {
+        position: relative;
+        text-align: left;
+        width: calc(100%) !important;
+        margin: 0 auto !important;
+      }
+      .card-title {
+        position: absolute;
+        bottom: 10%;
+        left: 2%;
+        font-size: 1em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+        text-transform: uppercase;
+      }
+
+      .card-subtitle {
+        position: absolute;
+        bottom: 2%;
+        left: 2%;
+        font-size: 1.25em;
+        font-weight: bold;
+        width: 100%;
+        color: #fff;
+        text-transform: uppercase;
+      }
+
+      .overlay {
+        position: absolute;
+        min-width: 100%;
+        min-height: 100%;
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+84,000000+99&0+19,0+61,0.65+100 */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 19%, rgba(0,0,0,0) 61%, rgba(0,0,0,0.38) 84%, rgba(0,0,0,0.63) 99%, rgba(0,0,0,0.65) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 19%,rgba(0,0,0,0) 61%,rgba(0,0,0,0.38) 84%,rgba(0,0,0,0.63) 99%,rgba(0,0,0,0.65) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 19%,rgba(0,0,0,0) 61%,rgba(0,0,0,0.38) 84%,rgba(0,0,0,0.63) 99%,rgba(0,0,0,0.65) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 ); /* IE6-9 */
+
+      }
+
+      .no_record_found{
+          width: 90%;
+          margin: auto;
+          p{
+              text-align: center;
+              font-size: 24px;
+              color: #000000;
+          }
+      }
+
+  .all-card {
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card-title {
+      position: relative;
+      width: initial;
+      bottom: 0;
+    }
+  }
+
+  .list {
+    padding: 0 5px;
+
+    .item {
+      margin-bottom: 5px;
+      background-color: #F7F7F7;
+
+      .item-title {
+        padding: 10px 5px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #e9e9e9;
+
+        .item-all {
+          display: flex;
+          align-items: center;
+
+          img {
+            margin-right: 5px;
+          }
+        }
+
+        .all-text {
+          color: #062c3f;
+        }
+      }
+
+      .item-list {
+        display: -webkit-box;
+        overflow-x: scroll;
+        margin-bottom: 10px;
+
+        .list-item {
+          width: 100px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+
+          span {
+            text-align: center;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}

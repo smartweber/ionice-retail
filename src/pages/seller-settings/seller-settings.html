@@ -1,0 +1,122 @@
+<!--
+  Generated template for the SellerSettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>MY SHOP SETTINGS</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-title class="sub">Get paid <b>Fast</b> and <b>Securely</b>!</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-row justify-content-center>
+    <ion-col col-12>
+      <ion-card>
+        <ion-card-content ion-text color="primary" text-wrap>
+          To become a Seller, you must provide your <b>Date of Birth</b>, <b>Address</b>, and choose your <b>Funding Destination</b>. After selling an item, your funds are deposited within 1-5 business days.
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-list >
+    <ion-list-header>
+      Date of Birth
+    </ion-list-header>
+    <ion-item>
+      <!-- <ion-label color="primary">DOB</ion-label> -->
+      <ion-datetime [(ngModel)]="dob" displayFormat="DD MMMM YYYY" placeholder="DOB" text-right></ion-datetime>
+    </ion-item>
+  </ion-list>
+
+  <form [formGroup]="addressForm">
+
+    <ion-list>
+      <ion-list-header>
+        Address
+      </ion-list-header>
+
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Address</ion-label> -->
+        <ion-input formControlName="street1"  placeholder="Address" type="text"  autocapitalize="words"></ion-input>
+      </ion-item>
+
+
+
+      <ion-item >
+        <!-- <ion-label ion-text color="primary">State</ion-label> -->
+        <ion-select formControlName="state"  placeholder="State">
+          <ion-option *ngFor="let state of states;">{{state.abbreviation}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>City</ion-label> -->
+        <ion-input formControlName="city"  placeholder="City" type="text"  autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Zip Code</ion-label> -->
+        <ion-input formControlName="zip"  placeholder="Zip Code" maxlength="5" type="tel" ></ion-input>
+      </ion-item>
+
+
+    </ion-list>
+
+  </form>
+
+  <form [formGroup]="bankForm" (ngSubmit)="save(bankForm.value)">
+    <ion-list >
+      <ion-list-header>
+        Bank Information
+      </ion-list-header>
+
+      <ion-item text-wrap *ngIf="!updatingBankInfo">
+        <ion-icon name="ios-home-outline" item-start></ion-icon>
+        <b><h2 ion-text color="primary">**** {{bankLast4}}</h2></b>
+        <b><h2>{{routingNumber}}</h2></b>
+        <p>{{accountStatus}}</p>
+        <ion-note item-end>
+          <button ion-button color="rt-blue-c" round (tap)="updateBank()">Update</button>
+        </ion-note>
+      </ion-item>
+
+      <ion-item *ngIf="updatingBankInfo">
+        <!-- <ion-label color="primary" fixed>Routing Number</ion-label> -->
+        <ion-input formControlName="routingNumber" maxlength="12" type="tel" placeholder="Routing Number" ></ion-input>
+      </ion-item>
+      <ion-item *ngIf="updatingBankInfo">
+        <!-- <ion-label color="primary" fixed>Account Number</ion-label> -->
+        <ion-input formControlName="accountNumber" maxlength="18" type="tel" placeholder="Account Number" ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <ion-card>
+          <ion-card-content ion-text color="primary" text-wrap>
+            We'll need your bank account information to deposit your earnings. This only allows ReelTrail to deposit funds into your account, not withdraw them.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row justify-content-center *ngIf="updatingBankInfo">
+      <ion-col col-8 text-center>
+        <button [disabled]="!bankForm.valid || !addressForm.valid || !dob" type="submit" round ion-button>SAVE</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

@@ -1,0 +1,260 @@
+<!--
+  Generated template for the ItemDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Listing Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <ion-row>
+    <ion-col class="slider">
+      <ion-slides pager [initialSlide]="selectedIndex">
+
+        <ion-slide *ngFor="let img of item.images ; let i = index">
+          <img [src]="img.secure_url" #imageToView (tap)="isShownImgViewer = true ; selectedIndex = i">
+        </ion-slide>
+
+      </ion-slides>
+
+    </ion-col>
+
+  </ion-row> -->
+  <ion-row class="updated-info">
+    <ion-col>
+      <img [src]="item.postedBy.profileImage ? item.postedBy.profileImage.url : 'assets/imgs/defaultImage.png'" class="img-circle">
+      <div>
+        <p>{{item.postedBy.name}}</p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row align-items-center padding-horizontal>
+    <ion-col col-12 *ngFor="let img of item.images ; let i = index" text-center>
+      <img [src]="img.secure_url" #imageToView (tap)="isShownImgViewer = true ; selectedIndex = i">
+    </ion-col>
+  </ion-row>
+
+  <ion-row align-items-center padding-horizontal>
+    <ion-col>
+      <h4>{{item.title}}</h4>
+    </ion-col>
+  </ion-row>
+
+  <ion-row align-items-center padding-horizontal>
+    <ion-col>
+
+      <h4 class="price" ion-text color="tr-blue-c">
+        <b>{{item.price|currency:'USD'}}</b>
+        <s *ngIf="item.originalPrice" style="text-decoration: line-through">{{item.originalPrice|currency:'USD'}}</s>
+      </h4>
+    </ion-col>
+    <ion-col *ngIf="!preview">
+      <ion-item>
+        <ion-label>Qty</ion-label>
+        <ion-select [(ngModel)]="qty" [selectOptions]="qtyAlertOpts">
+          <ion-option *ngFor="let n of qtyOptions;">{{n}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row align-items-center padding-horizontal *ngIf="!preview">
+    <ion-col text-center *ngIf="inCart">
+      <button color="danger" full ion-button icon-left (tap)="removeFromCart()">
+        <ion-icon name="ios-cart-outline"></ion-icon>
+        REMOVE FROM CART
+      </button>
+    </ion-col>
+    <ng-container *ngIf="!inCart">
+      <ion-col text-center>
+        <button full round ion-button icon-left (tap)="addToCart()">
+          <ion-icon name="ios-cart-outline"></ion-icon>
+          ADD TO CART
+        </button>
+      </ion-col>
+      <!-- <ion-col text-center style="width:fit-content;max-width: fit-content;min-width: fit-content;"> OR </ion-col>
+      <ion-col text-center>
+        <img style="cursor:pointer" src="assets/imgs/paypal-button@2x-d5ec2863.png" (tap)="expressCheckoutPaypal()">       
+      </ion-col> -->
+    </ng-container>
+  </ion-row>
+  <ion-row align-items-center padding-horizontal *ngIf="!preview && item.offers && !hasOffer">
+    <ion-col text-center>
+      <button full round ion-button icon-left color="rt-blue" (tap)="makeOffer()">
+        <ion-icon name="ios-cash-outline"></ion-icon>
+        MAKE OFFER
+      </button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center padding-horizontal *ngIf="!preview">
+    <ion-col col-6 text-center>
+      <button round full ion-button icon-left color="rt-blue" (tap)="messsageSeller()">
+        <ion-icon name="ios-chatboxes-outline"></ion-icon>
+        MESSAGE
+      </button>
+    </ion-col>
+    <ion-col col-6 text-center>
+      <button *ngIf="!watching " round full ion-button icon-left color="rt-blue" (tap)="watchToggle()">
+        <ion-icon name="ios-eye-outline"></ion-icon>
+        WATCH
+      </button>
+      <button *ngIf="watching " round full ion-button icon-left color="rt-orange" (tap)="watchToggle()">
+        <ion-icon name="ios-eye-outline"></ion-icon>
+        UNWATCH
+      </button>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-row justify-content-center padding-horizontal *ngIf="!preview">
+    <ion-col col-8 text-center>
+      <button round full ion-button icon-left color="rt-blue">
+        <ion-icon name="ios-albums-outline"></ion-icon>
+        STORE FRONT
+      </button>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row padding-horizontal>
+    <ion-col>
+      <h4 ion-text color="primary">
+        Condition
+      </h4>
+      <p ion-text color="rt-blue">
+        {{item.condition}}
+      </p>
+    </ion-col>
+    <ion-col>
+      <h4 ion-text color="primary">
+        Shipping
+      </h4>
+      <p ion-text color="rt-blue">
+        <ng-container *ngIf="!(item.shippingFee == 0)">{{item.shippingFee|currency:'USD'}}</ng-container>
+        <ng-container *ngIf="item.shippingFee == 0">Free</ng-container>
+      </p>
+      </ion-col>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <div>
+      <h4 ion-text color="primary">
+        Description
+      </h4>
+      <p ion-text color="rt-blue" class="desc">
+        {{item.description}}
+      </p>
+    </div>
+  </ion-row>
+
+  <!-- <ion-row padding-horizontal>
+    <div>
+      <h4 ion-text color = "primary">
+        Posted on
+      </h4>
+      <p ion-text color = "rt-blue">
+        {{getPostedDate()}}
+      </p>
+    </div>
+  </ion-row> -->
+
+  <!-- <ion-row padding-horizontal>
+    <div>
+      <h4 ion-text color = "primary">
+        Seller
+      </h4>
+      <p ion-text color = "rt-blue">
+        {{item.postedBy.name}}
+      </p>
+    </div>
+  </ion-row> -->
+
+  <ion-row padding-horizontal>
+    <div>
+      <h4 ion-text color="primary">
+        Return Policy
+      </h4>
+      <p ion-text color="rt-blue" *ngIf="item.returns == 0">
+        NO RETURNS
+      </p>
+      <p ion-text color="rt-blue" *ngIf="item.returns != 0">
+        {{item.returns}} Days
+      </p>
+    </div>
+  </ion-row>
+
+  <ion-row padding-horizontal *ngIf="!item.merchandise">
+    <div>
+      <h4 ion-text color="primary">
+        Category
+      </h4>
+      <p ion-text color="rt-blue">
+
+        <span> {{item.category.level_1.name}} > {{item.category.level_2.name}} > {{item.category.level_3.name}} </span>
+      </p>
+    </div>
+  </ion-row>
+
+  <ion-row padding-horizontal>
+    <div>
+      <h4 ion-text color="primary">
+        Country of Manufacture
+      </h4>
+      <p ion-text color="rt-blue">
+        {{item.countryOfManufacture}}
+      </p>
+    </div>
+  </ion-row>
+
+  <ng-container *ngIf="!item.merchandise">
+    <ion-list>
+      <ion-list-header>Related Gear</ion-list-header>
+    </ion-list>
+    <ion-scroll [hidden]="relatedItems.length == 0" scrollX="true" style="height:20em;">
+      <div #innerContainerRelated class="inner">
+        <ion-card *ngFor="let item of relatedItems" (tap)="view(item)">
+          <img *ngIf="item.thumbnail" [src]="item.thumbnail" />
+          <img *ngIf="!item.thumbnail" [src]="item.images[0].secure_url" />
+          <ion-card-content>
+            <!-- <div class="card-posted">by {{item.postedBy.name}}</div> -->
+            <div class="card-title">{{item.title}}</div>
+            <div class="card-subtitle">
+              <span>
+                <strong>{{item.price|currency:'USD'}}</strong>
+              </span>
+              <span *ngIf="item.originalPrice">
+                <s style="text-decoration: line-through">{{item.originalPrice|currency:'USD'}}</s>
+              </span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-scroll>
+  </ng-container>
+</ion-content>
+
+<div class="img-viewer" *ngIf="isShownImgViewer">
+
+  <ion-navbar>
+    <button ion-button clear color="light" icon-start (click)="isShownImgViewer = false">
+      <ion-icon name="ios-arrow-back"></ion-icon>
+      <span>Back</span>
+    </button>
+  </ion-navbar>
+
+  <ion-slides pager [initialSlide]="selectedIndex" #slider>
+
+    <ion-slide *ngFor="let img of item.images">
+      <img [src]="img.secure_url" #imageToView (tap)="onClick(imageToView)">
+    </ion-slide>
+
+  </ion-slides>
+</div>

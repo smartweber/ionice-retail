@@ -1,0 +1,134 @@
+<!--
+  Generated template for the SellPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-buttons start>
+      <button ion-button small class="border-green" clear (click)="features()">How It Works</button>
+    </ion-buttons>
+    <ion-title>Sell</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="openCart()">
+        <ion-icon name="ios-cart-outline">
+          <ion-badge *ngIf="counter > 0" id="notifications-badge" color="danger">{{counter}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-segment color="rt-green" [(ngModel)]="category" (ionChange)="changeCategory()">
+      <ion-segment-button value="gear">
+        Sell Your Gear
+      </ion-segment-button>
+      <ion-segment-button value="adventures">
+        Promote Your Adventure
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.gear-section]="category === 'gear'" [class.adventure-section]="category === 'adventures'">
+  <ng-container *ngIf="category === 'gear'">
+    <ion-row>
+      <ion-col class="txt">
+        <h4>
+          <i>Sell Your Outdoor Gear</i>
+        </h4>
+        <h5>Only pay 7.5% when your item sells</h5>
+        <ul>
+          <li>1% of each sale is donated to conservation.</li>
+          <li>List unlimited gear, for free.</li>
+          <li>Get paid via Direct Deposit, Venmo or PayPal.</li>
+          <li>Seller protection on all orders.</li>
+          <li>Print shipping labels directly from the app.</li>
+          <li>Negotiate with potential buyers to get top dollar on your gear.</li>
+        </ul>
+        <p>
+          <strong>Ready to get started?</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button round full ion-button icon-left color="primary" class="btn-activity" (tap)="sell('newGear')">Start Selling</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col padding></ion-col>
+    </ion-row>
+  </ng-container>
+
+  <ng-container *ngIf="category === 'adventures'">
+    <ion-row>
+      <ion-col class="txt">
+        <h4>
+          <i>Promote Your Adventure Trip, Guide, or Service</i>
+        </h4>
+        <h5>$3.00 per day</h5>
+        <ul>
+          <li>Fly fishing guide? Snowboard instructor? Rock climbing teacher? Let the outdoor world know what you have to offer.</li>
+          <li>Gain more exposure.</li>
+          <li>Acquire more leads.</li>
+          <li>Booking and Contact is handled between you & the customer.</li>
+          <li>We don't charge a fee when someone books with you</li>
+        </ul>
+        <p>
+          <strong>Ready to increase your business?</strong>
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button round full ion-button icon-left color="primary" class="btn-activity" (tap)="sell('newAdventure')">Start Marketing</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col padding></ion-col>
+      </ion-row>
+  </ng-container>
+
+
+  <!-- <ion-row style="height: 100%;">
+    <ion-col col-12>
+      <ion-card (tap) = "sell('newGear')" style="height: 100%;">
+        <img src="assets/imgs/sell_gear.jpg"  style="height: 100%;"/>
+        <div class="card-title">SELL YOUR OUTDOOR GEAR</div>
+        <div class="card-desc">
+          <ul>
+            <li>List for free</li>
+            <li>Pay 7.5% only when your gear sells</li>
+            <li>Get paid via PayPal, Venmo, or Direct deposit</li>
+            <li>Purchase & print shipping labels at your finger tips</li>
+            <li>Make your gear stand out with our Listing Options</li>
+          </ul>
+        </div>
+
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 class="divider">
+      <hr>
+      <span>OR</span>
+    </ion-col>
+    <ion-col col-12>
+      <ion-card (tap) = "sell('newAdventure')" style="height: 100%;">
+        <img src="assets/imgs/sell_adv.jpg" style="height: 100%;" />
+        <div class="card-title">MARKET YOUR ADVENTURE</div>
+        <div class="card-desc">
+          <ul>
+            <li>Market your service for only $3.00 per day</li>
+            <li>Get more exposure</li>
+            <li>Get more business</li>
+            <li>Make your Adventure stand out with our Listing Options</li>
+          </ul>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row> -->
+
+
+</ion-content>

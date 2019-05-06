@@ -1,0 +1,91 @@
+<!--
+  Generated template for the AddressesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>ADDRESSES</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="newAddress()">
+        <ion-icon name="md-add-circle">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-row justify-content-center *ngIf="!(addresses.length>0)">
+    <ion-col col-12 text-center>
+      <h4 ion-text color = "rt-blue-c">
+      Oops, looks like you have not added any address. Tap <span><ion-icon name="md-add-circle"></ion-icon></span> to add an address to your profile.
+      </h4>
+    </ion-col>
+  </ion-row>
+
+  <ion-row justify-content-center *ngIf="(addresses.length>0) && isEmpty(primaryAddress)">
+    <ion-col col-12 text-center>
+      <h4 ion-text color = "rt-blue-c">
+      It looks like you have not set your primary address. To make an address your "Primary address" or to delete an address, just swipe left on any address list item.
+      </h4>
+    </ion-col>
+  </ion-row>
+
+  <ion-list>
+    <ion-list-header *ngIf="!isEmpty(primaryAddress)">
+      My Primary Address
+    </ion-list-header>
+
+    <ion-item text-wrap *ngIf="!isEmpty(primaryAddress)">
+      <ion-icon name="ios-home-outline" item-start></ion-icon>
+      <b><h3 ion-text color="primary">{{primaryAddress.name}}</h3></b>
+      <b><h2>{{primaryAddress.street1}}</h2></b>
+      <p>{{primaryAddress.city}}, {{primaryAddress.state}} {{primaryAddress.zip}}</p>
+      <ion-note item-end>
+        PRIMARY
+      </ion-note>
+    </ion-item>
+
+    <ion-list-header *ngIf="(addresses.length>0)">
+      My Addresses
+    </ion-list-header>
+
+    <ng-container *ngFor="let address of addresses">
+      <ion-item-sliding #slidingItem *ngIf="address && primaryAddress && address._id != primaryAddress._id">
+        <ion-item text-wrap >
+          <ion-icon name="ios-home-outline" item-start></ion-icon>
+          <b><h3 ion-text color="primary">{{address.name}}</h3></b>
+          <b><h2>{{address.street1}}</h2></b>
+          <p>{{address.city}}, {{address.state}} {{address.zip}}</p>
+
+          <!-- <ion-note item-end>
+          <button ion-button color="rt-blue-c" round (tap) = "makePrimary(address)">Primary</button>
+        </ion-note> -->
+        </ion-item>
+        <ion-item-options side="right">
+        <button ion-button color="rt-blue-c" (tap)="makePrimary(slidingItem, address)">
+        <ion-icon name="ios-bookmark-outline"></ion-icon>
+          PRIMARY
+        </button>
+        <button ion-button color="rt-green-c" (tap)="editAddress(slidingItem, address)">
+            <ion-icon name="ios-create-outline"></ion-icon>
+            EDIT
+        </button>
+        <button ion-button color="danger" (tap)="delete(slidingItem, address)">
+        <ion-icon name="ios-trash-outline"></ion-icon>
+          DELETE
+        </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ng-container>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,28 @@
+page-about-how-it-works {
+    .small-font{
+        ion-item *{
+            font-size:11px;
+        }
+    }
+    h4{
+        font-size: 1.4rem;
+        font-weight: normal;
+    }
+    .black{
+        background: black;
+        color:white;
+    }
+    table{
+        border:1px solid #ccc;
+    }
+    table tr{
+        border-bottom:1px solid #ccc;
+    }
+    table td,table th{
+        border-right:1px solid #ccc;
+        padding:5px;
+    }
+    a[href="/seller-landing"],.btn.btn-success{
+        display: none !important;
+    }
+}

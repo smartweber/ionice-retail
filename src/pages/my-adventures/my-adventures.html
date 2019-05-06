@@ -1,0 +1,54 @@
+<!--
+  Generated template for the MyItemsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>ADVENTURES</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 color="rt-blue-c" text-center *ngIf="adventures.length === 0">Oops, looks like you have not added any adventures.</h4>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let adventure of adventures" #slidingItem>
+      <ion-item (tap)="details (adventure.id)" text-wrap>
+        <ion-thumbnail item-start>
+          <img [src]="adventure.thumbnail">
+        </ion-thumbnail>
+        <h2>{{adventure.title}}</h2>
+        <!-- <p><span *ngFor="let cat of adventure.cat; let i = index">{{cat}} <span *ngIf="i < adventure.cat.length-1">&gt;</span> </span></p> -->
+        <ion-note item-end>
+          ${{adventure.price}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="rt-blue-b" (tap)="edit(adventure, slidingItem)">
+          <ion-icon name="ios-create-outline"></ion-icon>
+          EDIT
+        </button>
+        <button ion-button color="danger" (tap)="delete( adventure._id, slidingItem)">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+          DELETE
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+   <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+</ion-content>

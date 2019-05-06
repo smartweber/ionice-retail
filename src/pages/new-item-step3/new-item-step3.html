@@ -1,0 +1,118 @@
+<!--
+  Generated template for the NewItemstep3Page page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>{{pageTitle}}</ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-row justify-content-center>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          1
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          2
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble done">
+          3
+        </div>
+      </ion-col>
+      <ion-col col-auto>
+        <div ion-text color="light" class="buble">
+          4
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-title class="sub">Set price and other details</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-item>
+    <ion-thumbnail item-start>
+      <img *ngIf="prevData.images" [src]="prevData.images[0].url">
+    </ion-thumbnail>
+    <h2>{{prevData.title}}</h2>
+    <p>{{category}}</p>
+    <ion-note item-end>
+      <!-- {{(item.ourPrice)|currency:'USD'}} -->
+    </ion-note>
+  </ion-item>
+
+  <form [formGroup]="step3Form" (ngSubmit)="next(step3Form.value)">
+
+    <ion-list>
+      <ion-list-header>
+        Sell Price Details
+      </ion-list-header>
+      <ion-row>
+        <ion-col col-12>
+          <ion-item>
+            <ion-input placeholder="Original Price (optional)"  color="rt-blue-c" formControlName="originalPrice"  [type]="platform.is('android') ? 'number':'text'" pattern="[0-9]*"  money-input-mask [masker]="{money: true, thousand: '',numeric:true,  decimalCaracter: '.', decimal: '2'}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Offers
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Accept Offers?</ion-label>
+        <ion-checkbox color="primary" formControlName="isAcceptingOffers"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="step3Form.controls['isAcceptingOffers'].value">
+        <ion-label color="primary" fixed>Lowest Offer</ion-label>
+        <ion-input (blur)="changeLowestOffer(event)" [class.form-invalid]="step3Form.controls.isAcceptingOffers.value && step3Form.controls.lowestOffer.value == ''" placeholder="(required)" color="rt-blue-c" formControlName="lowestOffer" (keypress)="changeLowestOffer(event)"  [type]="platform.is('android') ? 'number':'text'" pattern="[0-9]*"  money-input-mask [masker]="{money: true, thousand: '',numeric:true,  decimalCaracter: '.', decimal: '2'}"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Identification
+      </ion-list-header>
+      <ion-item>
+        <ion-input placeholder="SKU (optional)" color="rt-blue-c" formControlName="sku" type="text" autocapitalize="words"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder = "Youtube link (optional)" color="rt-blue-c" formControlName="youtubelink" type="text" autocapitalize="off"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Handcrafted? (optional)</ion-label>
+        <ion-checkbox color="primary" formControlName="handcrafted" ></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Country of Manufacture</ion-label>
+        <ion-select formControlName="countryOfManufacture" [selectOptions]="countryOpt" placeholder="Country of Manufacture">
+          <ion-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-6 text-center>
+        <button type="button" (click)="goBack()" round ion-button full>BACK</button>
+      </ion-col>
+      <ion-col col-6 text-center>
+        <button [disabled]="!step3Form.valid" type="submit" round ion-button full>NEXT</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

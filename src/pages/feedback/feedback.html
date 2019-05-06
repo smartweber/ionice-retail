@@ -1,0 +1,194 @@
+<!--
+  Generated template for the FeedbackPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>FEEDBACK</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <!-- <ion-toolbar no-border-top color="rt-blue">
+    <ion-segment color="rt-green" [(ngModel)]="type">
+      <ion-segment-button value="received">
+        RECEIVED
+      </ion-segment-button>
+      <ion-segment-button value="sent">
+        SENT
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar> -->
+
+</ion-header>
+
+
+<ion-content>
+
+
+
+  <ion-card *ngFor="let f of feedback" >
+    <ion-card-header>
+      <ion-row *ngIf="f.shipping_order">
+        <ion-col *ngIf="f.shipping_order.line_items && f.shipping_order.line_items.length>0">
+          {{f.shipping_order.line_items[0].title}}
+        </ion-col>
+        <ion-col *ngIf="!f.shipping_order.line_items || f.shipping_order.line_items.length==0">
+          {{f.shipping_order.order_id}}
+        </ion-col>
+        <ion-col>
+          Order placed on {{f.shipping_order.createdAt|date:'mediumDate'}}
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <ng-container *ngIf="myEmail == f.merchant.user.email">
+      <ion-list *ngIf="f.customer.feedback">
+        <ion-list-header>From {{f.customer.user.name}}</ion-list-header>
+        <ion-item text-wrap>
+          <ion-avatar item-start>
+            <img [src]="f.customer.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{f.customer.feedback}}</h2>
+          <p>rating: {{f.customer.rating.rating}}</p>
+
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+      </ion-list>
+
+      <ion-list style="padding-top:1em;">
+        <ion-list-header>Feedback given to {{f.customer.user.name}}</ion-list-header>
+        <ion-item *ngIf="f.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="f.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{f.merchant.feedback}}</h2>
+          <p>rating: {{f.merchant.rating.rating}}</p>
+
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <button *ngIf="!f.merchant.feedback" ion-item (tap)="sendFeedback(f)">
+        Give Feedback to {{f.customer.user.name}}
+        </button>
+
+      </ion-list>
+    </ng-container>
+
+
+
+    <ng-container *ngIf="myEmail == f.customer.user.email">
+      <ion-list >
+        <ion-list-header>Feedback from {{f.merchant.user.name}}</ion-list-header>
+        <ion-item *ngIf="f.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="f.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{f.merchant.feedback}}</h2>
+          <p>rating: {{f.merchant.rating.rating}}</p>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <ion-item *ngIf="!f.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="f.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>No feedback given yet</h2>
+
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+      </ion-list>
+
+      <ion-list style="padding-top:1em;">
+        <ion-list-header>Feedback given to {{f.merchant.user.name}}</ion-list-header>
+        <ion-item *ngIf="f.customer.feedback">
+          <ion-avatar item-start>
+            <img [src]="f.customer.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{f.customer.feedback}}</h2>
+          <p>rating: {{f.customer.rating.rating}}</p>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <button *ngIf="!f.customer.feedback" ion-item (tap)="sendFeedback(f)">
+        Give Feedback to {{f.merchant.user.name}}
+        </button>
+
+      </ion-list>
+    </ng-container>
+
+
+
+
+
+
+  </ion-card>
+
+
+
+
+
+
+
+  <!-- <div [ngSwitch]="type">
+    <div *ngSwitchCase="'received'">
+      <h4 color="rt-blue-c" text-center *ngIf="feedback.length === 0">Oops, looks like you have not received any feedback.</h4>
+
+      <ion-list>
+        <ng-container *ngFor="let f of feedback">
+          <ion-item-sliding #slidingItem *ngIf="f.recipientId.username === username">
+            <ion-item>
+              <ion-avatar item-start>
+                <img [src]="getImage(f.senderId.profileImage)">
+              </ion-avatar>
+              <h2>@{{f.senderId.username}}</h2>
+              <p>{{f.saleId.listingId.title}}</p>
+              <p>{{f.comment}}</p>
+              <ion-note item-end>
+                <ion-thumbnail item-start>
+                  <img [src]="f.saleId.listingId.images[0].url">
+                </ion-thumbnail>
+              </ion-note>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="rt-blue-b" (tap)="sendFeedback(f)">
+            <ion-icon name="ios-megaphone-outline"></ion-icon>
+            SEND FEEDBACK
+          </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ng-container>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'sent'">
+      <h4 color="rt-blue-c" text-center *ngIf="feedback.length === 0">Oops, looks like you have not sent any feedback.</h4>
+
+      <ion-list>
+        <ng-container *ngFor="let f of feedback">
+          <ion-item-sliding #slidingItem *ngIf="f.senderId.username === username">
+            <ion-item>
+              <ion-avatar item-start>
+                <img [src]="getImage(f.recipientId.profileImage)">
+              </ion-avatar>
+              <h2>@{{f.recipientId.username}}</h2>
+              <p>{{f.saleId.listingId.title}}</p>
+              <p>{{f.comment}}</p>
+              <ion-note item-end>
+                <ion-thumbnail item-start>
+                  <img [src]="f.saleId.listingId.images[0].url">
+                </ion-thumbnail>
+              </ion-note>
+            </ion-item>
+
+          </ion-item-sliding>
+        </ng-container>
+      </ion-list>
+    </div>
+  </div> -->
+
+
+
+</ion-content>

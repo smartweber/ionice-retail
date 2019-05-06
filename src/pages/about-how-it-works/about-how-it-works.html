@@ -1,0 +1,215 @@
+<!--
+  Generated template for the AboutHowItWorksPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>How It Works</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="seoContent">
+  <ion-row>
+    <ion-col padding></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col [innerHTML]="seoContent" padding></ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col padding>
+      <p text-center>
+        <button ion-button round color="primary" (click)="sell()">Start Selling Now</button>
+      </p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col padding></ion-col>
+  </ion-row>
+</ion-content>
+<ion-content padding *ngIf="!seoContent">
+  <ion-card>
+    <ion-card-content>
+      <p>
+        Here at ReelTrail, we like to be transparent and upfront. We do not charge hidden fees, and you can list as many items as
+        you want.
+      </p>
+    </ion-card-content>
+    <img src="assets/imgs/how-it-works.jpg" />
+  </ion-card>
+  <p padding>Below is a clear and simple break down of our fees with some comparisons.</p>
+  <ion-card class="small-font">
+    <ion-card-content>
+      <ion-card-title>
+        Example of an item selling for $1,000
+      </ion-card-title>
+      <ion-row>
+        <ion-col col-6>
+          <img src="assets/icon/white-minimal-no-bg.png" style="background:#000">
+          <br>7.5%
+        </ion-col>
+        <ion-col col-6>
+          <ion-list no-lines>
+            <ion-item text-wrap>
+              Listing Fee
+              <p style="color:#669900">{{0|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Payment Processing Fee
+              <p style="color:#669900">{{29.45|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Fee Once Item Sells
+              <p style="color:#669900">{{75|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Fees
+              <p style="color:#669900">{{104.45|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Profit
+              <p style="color:#669900">{{895.55|currency:'USD'}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <hr color="rt-blue" style="height:1px;margin:0px">
+      <ion-row>
+        <ion-col col-6>
+          <img src="assets/icon/amazon.png">
+          <br>15%
+        </ion-col>
+        <ion-col col-6>
+          <ion-list no-lines>
+            <ion-item text-wrap>
+              Listing Fee
+              <p style="color:#669900">{{0.99|currency:'USD'}} per item</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Payment Processing Fee
+              <p style="color:#669900">{{29.30|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Fee Once Item Sells
+              <p style="color:#669900">{{150|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Fees
+              <p style="color:#669900">{{180.29|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Profit
+              <p style="color:#669900">{{819.71|currency:'USD'}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <hr color="rt-blue" style="height:1px;margin:0px">
+      <ion-row>
+        <ion-col col-6>
+          <img src="assets/icon/ebay.png">
+          <br>10%
+        </ion-col>
+        <ion-col col-6>
+          <ion-list no-lines>
+            <ion-item text-wrap>
+              Listing Fee
+              <p style="color:#669900">{{0.30|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Payment Processing Fee
+              <p style="color:#669900">{{29.30|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Fee Once Item Sells
+              <p style="color:#669900">{{100|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Fees
+              <p style="color:#669900">{{129.60|currency:'USD'}}</p>
+            </ion-item>
+            <ion-item text-wrap>
+              Total Profit
+              <p style="color:#669900">{{870.40|currency:'USD'}}</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <p padding>
+    <ion-icon name="checkmark" color="rt-green"></ion-icon> We do not charge hidden fees.
+    <br>
+    <ion-icon name="checkmark" color="rt-green"></ion-icon> You can list as many items as you want.
+  </p>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Outdoor Selling Options
+      </ion-card-title>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> ReelTrail Guarantee
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> List Unlimited Items
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Direct Transfers to Bank Account
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Print Shipping Labels
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Email Marketing
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Optional Listing Fees to Make Your Item Stand Out
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Easy Price Negotiating
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> First-class Customer Support
+      <br>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Adventure Trips - Listing Fees
+      </ion-card-title>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> To list an Adventure Trip with ReelTrail, it is $3.00 a day, for as many days as you'd like. There are
+      no subscription choices or hidden fees.
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Our Listing Options are available to use for Adventure Trips as well, and the prices are the same
+      <br>
+      <ion-icon name="checkmark" color="rt-green"></ion-icon> Our processing fee will be included in the total.
+      <br>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Listing Options, to help your item stand out!
+      </ion-card-title>
+      <p>Our Listing Options consist of priority placements and attention-getting features that help to get more buyers to look
+        at and hopefully buy on your item. When a seller elects to use Listing Options, the seller incurs a small fee at
+        the time of listing. Listing options are non-refundable. As Gear-listings do not expire on ReelTrail, any listings
+        options that have been paid for (even if you decide to add some later) will stay in use with that particular listing.
+        Adventure-listings do expire, and listing options can be purchased for each listing.</p>
+      <h6 color="primary" padding>Showcase Listings ($5.00 per listing)</h6>
+      <p>Showcase Listings are the most powerful marketing tool our sellers can use. Showcase items are randomly displayed on
+        our Home Page. Our Home Page is the most-visited page on ReelTrail.com. Consequently, Showcase items will be seen
+        by the largest audience of any of our Listing Options. If your item does not sell, you can relist it without paying
+        this fee again.</p>
+      <h6 color="primary" padding> Highlight ($2.00 per listing)</h6>
+      <p> Make your listing stand out from others in the category listings for a small fee. This option highlights your listing
+        in yellow to make it stand out from other listings.</p>
+      <h6 color="primary" padding> Boldface Title ($1.00 per listing) </h6>
+      <p>Consider using boldface text to make your item's title stand out from the others in the category listings for a small
+        fee
+      </p>
+      <h6 color="primary" padding>View Counter ($0.50 per listing) </h6>
+      <p> A view counter keeps track of the number of times an item has been viewed since being listed. Sellers can use counters
+        as a way to gauge interest buyers have shown in an item. They can also experiment with different item titles and
+        upgrade features to measure the effectiveness of each variation.</p>
+    </ion-card-content>
+  </ion-card>
+  <p text-center>
+    <button ion-button round color="primary" (click)="sell()">Start Selling Now</button>
+  </p>
+</ion-content>

@@ -1,0 +1,85 @@
+<!--
+  Generated template for the CategoriesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue"> <!-- *ngIf="!itsapp"> -->
+    <ion-buttons start>
+        <!-- <button ion-button small class="border-green" clear (click)="features()">How It Works</button> -->
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/imgs/logo.png" height="40px">
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="openCart()">
+        <ion-icon name="ios-cart-outline">
+          <ion-badge *ngIf="counter > 0" id="notifications-badge" color="danger">{{counter}}</ion-badge>
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+  <ion-toolbar no-border-top color="rt-blue">
+    <ion-segment color="rt-green" [(ngModel)]="category" (ionChange)="changeCategory()">
+      <ion-segment-button value="gear">
+        Outdoor Gear
+      </ion-segment-button>
+      <ion-segment-button value="adventures">
+        Adventure Trips & Guides
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="category === 'gear'">
+    <ion-row align-items-center wrap>
+      <ion-col col-6  col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-3  *ngFor="let item of listings" (tap)="view(item)" class="fade-in">
+        <ion-card >
+          <img *ngIf="item.thumbnail" [src]="item.thumbnail" />
+          <img *ngIf="!item.thumbnail" [src]="item.images[0].secure_url" />
+          <ion-card-content>
+            <!-- <div class="card-posted">by {{item.postedBy.name}}</div> -->
+            <div class="card-title">{{item.title}}</div>
+            <div class="card-subtitle">
+              <span><strong>{{item.price|currency:'USD'}}</strong></span>
+              <span *ngIf="item.originalPrice"><s>{{item.originalPrice|currency:'USD'}}</s></span>
+              <span class="condition">{{item.condition}}</span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="category !== 'gear'">
+    <ion-row align-items-center>
+      <ion-col col-6 col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-3 *ngFor="let ad of adventures" (tap)="view(ad)" class="fade-in">
+        <ion-card>
+          <img [src]="ad.thumbnail" />
+          <ion-card-content>
+            <!-- <div class="card-posted">by {{ad.postedBy.name}}</div> -->
+            <div class="card-title">{{ad.title}}</div>
+            <div class="card-subtitle">
+              <span><strong>{{ad.price|currency:'USD'}}</strong></span>
+              <span *ngIf="ad.originalPrice"><s>{{ad.originalPrice|currency:'USD'}}</s></span>
+            </div>
+            <!-- <div class="card-subtitle"><span>{{ad.ourPrice|currency:'USD'}}+{{ad.flatShippingRate|currency:'USD'}}</span></div> -->
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+   <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,83 @@
+<!--
+  Generated template for the MyItemsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>PURCHASED</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 color="rt-blue-c" text-center *ngIf="orders.length === 0">Oops, looks like you have not added any payment purchases.</h4>
+
+  <!-- <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let purchase of purchases">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img [src]="purchase.saleId.listingId.images[0].url">
+        </ion-thumbnail>
+        <h2>{{purchase.saleId.listingId.title}}</h2>
+        <p><span *ngFor="let cat of purchase.saleId.listingId.categories; let i = index">{{cat.name}} <span *ngIf="i < purchase.saleId.listingId.categories.length-1">&gt;</span> </span></p>
+        <ion-note item-end>
+          {{(purchase.saleId.total*0.01)|currency:'USD'}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="rt-blue-b" (tap)="sendFeedback(purchase, slidingItem)">
+          <ion-icon name="ios-megaphone-outline"></ion-icon>
+          SEND FEEDBACK
+        </button>
+        <button ion-button color="rt-green-b" (tap)="goShippingDetails(purchase, slidingItem)">
+          <ion-icon name="ios-megaphone-outline"></ion-icon>
+          SHIPPING DETAILS
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list> -->
+
+  <ion-card *ngFor="let order of orders">
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          {{order.order_id}}
+        </ion-col>
+        <ion-col>
+          Order placed on {{order.createdAt|date:'mediumDate'}}
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <ion-list *ngFor="let store of order.shipping_orders">
+      <ion-list-header>from {{store.merchant.name}}</ion-list-header>
+      <ion-item *ngFor="let item of store.line_items">
+        <ion-avatar item-start>
+          <img [src]="item.thumbnail">
+        </ion-avatar>
+        <h2>{{item.title}}</h2>
+        <p>{{item.price|currency:'USD'}}</p>
+        <p *ngIf="item.tracking_numbers.length == 0">Gear has not shipped</p>
+        <p *ngIf="item.tracking_numbers.length > 0">Gear has been shipped</p>
+        <ion-note item-end>qty:{{item.qty}}</ion-note>
+      </ion-item>
+      <button ion-item (tap)= "details(order)">
+      <!-- <ion-icon name="paw" item-start></ion-icon> -->
+        More Details
+      </button>
+    </ion-list>
+  </ion-card>
+
+
+
+</ion-content>

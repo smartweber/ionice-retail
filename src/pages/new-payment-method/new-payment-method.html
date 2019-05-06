@@ -1,0 +1,64 @@
+<!--
+  Generated template for the NewPaymentMethodPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>NEW PAYMENT</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left small color="royal" (tap)="scan()">
+        <ion-icon name="ios-qr-scanner-outline">
+        </ion-icon>
+        Scan
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+  <form [formGroup]="cardForm" (ngSubmit)="addCard(cardForm.value)">
+
+    <ion-list>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Card Nickname</ion-label> -->
+        <ion-input color="rt-blue-c" placeholder="Card Nickname" formControlName="nickname" type="text" autocapitalize="sentences"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Credit Card Number</ion-label> -->
+        <ion-input color="rt-blue-c" maxlength="16"  placeholder="Credit Card Number"  formControlName="number" type="tel"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary">Expiration Date</ion-label> -->
+        <ion-datetime displayFormat="MM/YYYY"  placeholder="Expiration Date"  [max]="maxDate" [min]="minDate" formControlName="expirationDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>CVV</ion-label> -->
+        <ion-input formControlName="cvv"  placeholder="CVV"  maxlength="4" type="tel" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Billing Zip Code</ion-label> -->
+        <ion-input formControlName="postalCode"  placeholder="Billing Zip Code"  maxlength="5" type="tel" ></ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-8 text-center>
+        <button [disabled]="!cardForm.valid" type="submit" round ion-button>Add Card</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

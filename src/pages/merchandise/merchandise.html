@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar color="rt-blue">
+    <ion-title>Merchandise</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <ion-list>
+    <ion-item *ngFor="let item of listings" (tap)="view(item)">
+      <ion-thumbnail item-start>
+        <img [src]="item.images[0]">
+      </ion-thumbnail>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+      <ion-note item-end>{{item.ourPrice|currency:'USD'}}</ion-note>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-grid>
+    <ion-row align-items-center wrap>
+      <ion-col col-6  col-xs-6 col-sm-4 col-md-4 col-lg-3 col-xl-3  *ngFor="let item of listings" (tap)="view(item)" class="fade-in">
+        <ion-card >
+          <img *ngIf="item.thumbnail" [src]="item.thumbnail" />
+          <img *ngIf="!item.thumbnail" [src]="item.images[0].secure_url" />
+          <ion-card-content>
+            <!-- <div class="card-posted">by {{item.postedBy.name}}</div> -->
+            <div class="card-title">{{item.title}}</div>
+            <div class="card-subtitle">
+              <span><strong>{{item.price|currency:'USD'}}</strong></span>
+              <span *ngIf="item.originalPrice"><s>{{item.originalPrice|currency:'USD'}}</s></span>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+   <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,66 @@
+// @Author: Ruben
+// @Date:   2017-10-26T00:33:22-06:00
+// @Last modified by:   Ruben
+// @Last modified time: 2017-12-11T09:33:03-07:00
+
+
+
+page-sell {
+  .segment-button {
+    max-width: 170px !important;
+  }
+
+  ion-content.gear-section,
+  ion-content.adventure-section {
+    background-size: cover !important;
+    background-position: center !important;
+  }
+
+  ion-content.gear-section {
+    background: url(../assets/imgs/how-it-works-back.jpg);
+  }
+
+  ion-content.adventure-section {
+    background: url(../assets/imgs/activities.jpg);
+  }
+ion-col{
+  background-color: rgba(255, 255, 255, .8);
+}
+  .gear-section ion-col.txt,
+  .adventure-section ion-col.txt {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: bold;
+  }
+
+  .border-green{
+    border:1px solid #ffffff;
+    font-size: 10px;
+    height:24px;
+    color: #669900 !important;
+  }
+
+  h4, h5 {
+    font-weight: bold;
+  }
+
+  ul {
+    text-align: left;
+
+    li {
+      padding: 5px 0;
+    }
+  }
+
+  .btn-activity {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  p {
+    font-size: 16px;
+  }
+}

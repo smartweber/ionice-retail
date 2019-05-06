@@ -1,0 +1,60 @@
+<!--
+  Generated template for the MyItemsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>LISTINGS</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 color="rt-blue-c" text-center *ngIf="items.length === 0">Oops, looks like you have not added any listings.</h4>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let gear of items" #slidingItem>
+      <ion-item (tap)="details (gear.id)" text-wrap>
+        <ion-thumbnail item-start>
+          <img [src]="gear.thumbnail">
+        </ion-thumbnail>
+        <h2>{{gear.title}}</h2>
+        <p class="shipping"  *ngIf="!(gear.shippingFee == 0)" ion-text color="rt-blue-b">Shipping: {{gear.shippingFee|currency:'USD'}}</p>
+        <p class="shipping"  *ngIf="gear.shippingFee == 0" ion-text color="rt-blue-b">Free Shipping</p>
+        <!-- <p><span *ngFor="let cat of gear.cat; let i = index">{{cat}} <span *ngIf="i < gear.cat.length-1">&gt;</span> </span></p> -->
+        <ion-note item-end>
+          {{gear.price|currency:'USD'}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <!-- <button ion-button color="rt-green">
+          <ion-icon name="ios-cash-outline"></ion-icon>
+          OFFERS
+        </button> -->
+        <button ion-button color="rt-blue-b" (tap) = "edit(gear, slidingItem)">
+          <ion-icon name="ios-create-outline"></ion-icon>
+          EDIT
+        </button>
+        <button ion-button color="danger" (tap)="delete(gear.id, slidingItem)">
+          <ion-icon name="ios-trash-outline"></ion-icon>
+          DELETE
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+   <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+</ion-content>

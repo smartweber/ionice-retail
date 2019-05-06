@@ -1,0 +1,15 @@
+page-send-feedback {
+  img{
+    object-fit: cover;
+  }
+  ion-textarea{
+    padding: 0 10px;
+    border: 1px;
+    border-style: solid;
+    border-color: color($colors, light)
+  }
+
+  .rate-background ion-icon{
+    font-size: 3em;
+  }
+}

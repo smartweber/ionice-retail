@@ -1,0 +1,30 @@
+page-login {
+
+  ion-grid {
+    padding: 0;
+    height: 100%;
+  }
+  .center{
+    margin: auto 0;
+  }
+  ion-content {
+    background-image: url('../assets/imgs/bg1.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  ion-list {
+    margin: 0 !important;
+  }
+  ion-item {
+    background: transparent !important;
+    border-bottom: 1px solid #c8c7cc !important;
+  }
+
+  form {
+    margin-top: 15px;
+    background-color: white !important;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+  }
+
+}

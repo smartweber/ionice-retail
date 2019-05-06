@@ -1,0 +1,176 @@
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="loggedIn && showProfile" class="fade-in">
+    <ion-row class="head" justify-content-center>
+      <ion-col col-12 align-self-center text-center>
+        <ion-item no-lines text-center>
+          <ion-avatar text-center>
+            <img [src]="profileImg">
+          </ion-avatar>
+          <h1 class="name">{{name}}</h1>
+          <p ion-text color="light" class="sub">@{{username}}</p>
+          <p ion-text color="light" class="sub">{{location}}</p>
+          <p ion-text color="light" class="sub">{{dob}}</p>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center class="rate-background">
+      <ion-col col-auto>
+        <ion-icon color="rt-yellow" [name]="stars[0]" (tap)="rate(1)"></ion-icon>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-icon color="rt-yellow" [name]="stars[1]" (tap)="rate(2)"></ion-icon>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-icon color="rt-yellow" [name]="stars[2]" (tap)="rate(3)"></ion-icon>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-icon color="rt-yellow" [name]="stars[3]" (tap)="rate(4)"></ion-icon>
+      </ion-col>
+      <ion-col col-auto>
+        <ion-icon color="rt-yellow" [name]="stars[4]" (tap)="rate(5)"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center class="rate-background">
+      <ion-col text-center>
+        <h3 ion-text color="light">{{reviews}} Reviews</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-list no-lines>
+      <ion-item text-center (tap)="goTo('AboutHowItWorksPage')">
+        <button ion-button medium color="rt-pure-green" class="border-green" clear>
+          How It Works
+        </button>
+      </ion-item>
+      <ion-list-header>
+        Account
+      </ion-list-header>
+      <button ion-item (tap)="goTo('ProfileEditPage')">
+        <ion-icon name="ios-person-outline" item-start></ion-icon>
+        Profile
+      </button>
+      <button ion-item (tap)="goTo('NotificationsPage')">
+        <ion-icon name="ios-notifications-outline" item-start></ion-icon>
+        Notifications
+      </button>
+      <button ion-item (tap)="goTo('StoreSettingsPage')">
+        <ion-icon name="ios-settings-outline" item-start></ion-icon>
+        Store Settings
+      </button>
+      <button ion-item (tap)="goTo('AddressesPage')">
+        <ion-icon name="ios-locate-outline" item-start></ion-icon>
+        Addresses
+      </button>
+      <ion-list-header>
+        Selling
+      </ion-list-header>
+      <button ion-item (tap)="goTo('MySalesPage')">
+        <ion-icon name="ios-briefcase-outline" item-start></ion-icon>
+        Orders
+        <ion-icon color="danger" name="ios-notifications" *ngIf="sold && sold>0" item-end></ion-icon>
+      </button>
+      <button ion-item (tap)="goTo('OffersPage')">
+        <ion-icon name="ios-arrow-dropleft" item-start></ion-icon>
+        Offers Received
+      </button>
+      <button ion-item (tap)="goTo('MyItemsPage')">
+        <ion-icon name="ios-pricetag-outline" item-start></ion-icon>
+        Listings
+      </button>
+      <button ion-item (tap)="goTo('MyAdventuresPage')">
+        <ion-icon name="ios-compass-outline" item-start></ion-icon>
+        Adventures
+      </button>
+      <!-- <button ion-item (tap)="goTo('FeedbackPage')">
+        <ion-icon color="primary" name="ios-paper-outline" item-start></ion-icon>
+        Feedback
+      </button> -->
+      <ion-list-header>
+        Buying
+      </ion-list-header>
+      <button ion-item (tap)="goTo('MyPurchasesPage')">
+        <ion-icon name="ios-cart-outline" item-start></ion-icon>
+        Purchased
+      </button>
+      <button ion-item (tap)="goTo('WatchListPage')">
+        <ion-icon name="ios-eye-outline" item-start></ion-icon>
+        Watch List
+      </button>
+      <button ion-item (tap)="goTo('OffersPage')">
+        <ion-icon name="ios-arrow-dropright" item-start></ion-icon>
+        Offers Sent
+      </button>
+      <button ion-item (tap)="open('merchandise', 'all')">
+        <ion-icon name="ios-cart" item-start></ion-icon>
+        Shop Merchandise
+      </button>
+      <!-- <button ion-item (tap)="goTo('FeedbackPage')">
+        <ion-icon name="ios-paper-outline" item-start></ion-icon>
+        Feedback
+      </button> -->
+      <ion-list-header>
+        App Settings
+      </ion-list-header>
+      <button ion-item (tap)="goTo('AppSettingsPage')">
+        <ion-icon name="ios-settings-outline" item-start></ion-icon>
+        App Settings
+      </button>
+      <button ion-item (tap)="goTo('AboutPage')">
+        <ion-icon name="ios-information-circle-outline" item-start></ion-icon>
+        About
+      </button>
+      <button ion-item (tap)="logout()">
+        <ion-icon name="ios-exit-outline" item-start></ion-icon>
+        Log Out
+      </button>
+    </ion-list>
+  </div>
+
+
+
+  <!-- Not logged in -->
+  <div *ngIf="!loggedIn" class="check-bg">
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-6>
+          <img src="assets/imgs/logo.png" />
+        </ion-col>
+      </ion-row>
+
+      <ion-row justify-content-center>
+        <ion-col text-center padding-vertical>
+          <h2 ion-text color="light" class="verbiage">Your Home for Buying & Selling Outdoor Gear</h2>
+        </ion-col>
+      </ion-row>
+
+      <ion-row justify-content-center>
+        <ion-col col-8 text-center>
+          <button round full ion-button icon-left (tap)="login()">
+            <ion-icon name="ios-log-in-outline"></ion-icon>
+            Login
+          </button>
+        </ion-col>
+        <ion-col col-8 text-center>
+          <button round full ion-button icon-left (tap)="signup()">
+            <ion-icon name="ios-log-in-outline"></ion-icon>
+            Sign Up
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+
+
+</ion-content>

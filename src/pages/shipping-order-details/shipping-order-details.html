@@ -1,0 +1,233 @@
+<!--
+  Generated template for the ShippingOrderDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>Order Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header class="text-transform-none">GEAR SOLD</ion-list-header>
+    <!-- <ion-item-sliding #slidingItem *ngFor="let item of order.line_items"> -->
+    <ion-item *ngFor="let item of order.line_items">
+      <ion-avatar item-start>
+        <img [src]="item.thumbnail">
+      </ion-avatar>
+      <h2>{{item.title}}</h2>
+      <p>{{item.price|currency:'USD'}}</p>
+      <p *ngIf="item.tracking_numbers.length == 0">No tracking added yet</p>
+      <ion-note item-end>qty:{{item.qty}}</ion-note>
+    </ion-item>
+    <!--<ion-item-options side="right">
+        <button ion-button color="rt-blue-b" (tap)="sendFeedback(purchase, slidingItem)">
+              <ion-icon name="ios-megaphone-outline"></ion-icon>
+              SEND FEEDBACK
+            </button> - ->
+        <button ion-button color="rt-green-b" (tap)="shippingDetails(order, item, slidingItem)">
+          <ion-icon name="ios-megaphone-outline"></ion-icon>
+          SHIPPING
+          <br/> DETAILS
+        </button>
+      </ion-item-options>-->
+    <!-- </ion-item-sliding> -->
+  </ion-list>
+  <ion-list>
+    <ion-item text-center>
+      <button round ion-button color="rt-green-b" *ngIf="order.line_items.length > 0" (tap)="shippingDetails(order,order.line_items[0],'')">
+        SHIPPING LABEL + DETAILS
+      </button>
+    </ion-item>
+    <ion-list-header>
+      Order Details
+    </ion-list-header>
+
+    <ion-item>
+      <ion-row>
+        <ion-col col-12>
+          <p>Order# {{order.order_id}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p> Order placed on {{order.createdAt|date:'mediumDate'}}</p>
+        </ion-col>
+        <ion-col col-12 *ngIf="order.customer">
+          <p>Customer: {{order.customer.name}}</p>
+        </ion-col>
+        <ion-col col-12 *ngIf="!order.customer">
+          <p>Customer: {{order.ship_to_address.name}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p>Tracking Numbers:
+            <ng-container *ngFor="let item of order.line_items">
+              <ng-container *ngFor="let track of item.tracking_numbers">
+                <ion-item text-wrap text-left>
+                  {{track.tracking}}
+                  <ng-container *ngIf="track.status">
+                    <br>
+                    <span style="font-size:13px;">
+                      <b>Carrier: </b>{{track.carrier}}<br>
+                      <b>Status: </b>{{track.status.status}}<br>
+                      <b>Status Detail: </b>{{track.status.status_details}}
+                    </span>
+                  </ng-container>
+                  <p>
+                    <button round ion-button color="rt-green-b" *ngIf="track.label_url" (tap)="share(track)">
+                      Share/Print Label
+                    </button>
+                  </p>
+                </ion-item>
+              </ng-container>
+              <p *ngIf="item.tracking_numbers.length == 0">No tracking added yet</p>
+            </ng-container>
+
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Ship to
+    </ion-list-header>
+    <ion-item>
+      <ion-row>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.name}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.street1}}</p>
+        </ion-col>
+        <ion-col col-12 *ngIf="order.ship_to_address.street2">
+          <p>{{order.ship_to_address.street2}}</p>
+        </ion-col>
+        <ion-col col-12>
+          <p>{{order.ship_to_address.city}}, {{order.ship_to_address.state}} {{order.ship_to_address.zip}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>Transaction Summary</ion-list-header>
+    <ion-item>
+      <!-- <ion-avatar item-start>
+        <img [src]="item.thumbnail">
+      </ion-avatar> -->
+
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Gear Sale Amount</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.earnings_summary.gear_paid_amount|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Shipping Paid</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.earnings_summary.shipping_paid|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Taxes Paid</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.earnings_summary.taxes_paid|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>ReelTrail Fee ({{order.earnings_summary.subscription_rate}}%)</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.transaction_summary.processing_fee|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-6 text-left>
+          <p>Net Sale Earnings</p>
+        </ion-col>
+        <ion-col col-6 text-right>
+          <p>{{order.earnings_summary.earnings|currency:'USD'}}</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Payment</ion-list-header>
+    <ion-item text-wrap>
+      <ion-thumbnail item-start>
+        <img [src]="order.transaction_summary.payment_method.image" style="height:auto">
+      </ion-thumbnail>
+
+      <h2>**** {{order.transaction_summary.payment_method.description}}</h2>
+      <p>{{order.transaction_summary.payment_method.type}}</p>
+      <ion-note item-end>{{order.transaction_summary.total|currency:'USD'}}</ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-card *ngIf="feedback">
+    <ng-container *ngIf="feedback.merchant && feedback.merchant.user && myEmail == feedback.merchant.user.email">
+      <ion-list *ngIf="feedback.customer.feedback">
+        <ion-list-header>Feedback from {{feedback.customer.user.name}}</ion-list-header>
+        <ion-item text-wrap>
+          <ion-avatar item-start>
+            <img [src]="feedback.customer.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{feedback.customer.feedback}}</h2>
+          <ion-row justify-content-left class="rate-background" padding-horizontal>
+            <ion-col col-auto>
+              rating:
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray(feedback.customer.rating.rating)">
+              <ion-icon name="ios-star" color="rt-yellow"></ion-icon>
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray((5-feedback.customer.rating.rating))">
+              <ion-icon name="ios-star-outline" color="rt-yellow"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+      </ion-list>
+
+      <ion-list style="padding-top:1em;">
+        <ion-list-header>Feedback given to {{feedback.customer.user.name}}</ion-list-header>
+        <ion-item *ngIf="feedback.merchant.feedback" text-wrap>
+          <ion-avatar item-start>
+            <img [src]="feedback.merchant.user.profileImage.secure_url">
+          </ion-avatar>
+          <h2>{{feedback.merchant.feedback}}</h2>
+          <ion-row justify-content-left class="rate-background" padding-horizontal>
+            <ion-col col-auto>
+              rating:
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray(feedback.merchant.rating.rating)">
+              <ion-icon name="ios-star" color="rt-yellow"></ion-icon>
+            </ion-col>
+            <ion-col col-auto *ngFor="let fb of valueArray((5-feedback.merchant.rating.rating))">
+              <ion-icon name="ios-star-outline" color="rt-yellow"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <!-- <ion-note item-end>qty:{{item.qty}}</ion-note> -->
+        </ion-item>
+        <button *ngIf="!feedback.merchant.feedback" ion-item (tap)="sendFeedback()">
+          Give Feedback to {{feedback.customer.user.name}}
+        </button>
+
+      </ion-list>
+    </ng-container>
+  </ion-card>
+</ion-content>

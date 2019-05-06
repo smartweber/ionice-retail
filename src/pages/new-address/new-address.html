@@ -1,0 +1,73 @@
+<!--
+  Generated template for the NewAddressPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>NEW ADDRESS</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <form [formGroup]="addressForm" (ngSubmit)="addAddress(addressForm.value)">
+    <ion-list>
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Recipient</ion-label> -->
+        <ion-input color="rt-blue-c"  placeholder="Recipient" formControlName="name" type="text"  autocapitalize="words"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-select formControlName="country"  placeholder="Country">
+          <ion-option *ngFor="let c of countries;" [value]="c.code">{{c.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Address</ion-label> -->
+        <ion-input autocorrect="on" formControlName="street1"  placeholder="Address" type="text"  autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Apartment/Suite</ion-label> -->
+        <ion-input formControlName="street2"  placeholder="Apartment/Suite (optional)" type="text" autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item >
+        <!-- <ion-label ion-text color="primary">State</ion-label> -->
+        <ion-input formControlName="state"  placeholder="State or Province" type="text" autocapitalize="words"  *ngIf="addressForm.controls['country'].value!='US'"></ion-input>
+        <ion-select formControlName="state"  placeholder="State" *ngIf="addressForm.controls['country'].value=='US'">
+          <ion-option *ngFor="let state of states;">{{state.abbreviation}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>City</ion-label> -->
+        <ion-input autocorrect="on" formControlName="city"  placeholder="City" type="text"  autocapitalize="words"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Zip Code</ion-label> -->
+        <ion-input formControlName="zip"  placeholder="Zip Code" maxlength="5" type="tel" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <!-- <ion-label color="primary" fixed>Telephone Number</ion-label> -->
+        <ion-input formControlName="phone"  placeholder="Telephone Number" maxlength="10" type="tel" ></ion-input>
+        <p>10 digit mobile number</p>
+      </ion-item>
+
+    </ion-list>
+
+    <ion-row justify-content-center>
+      <ion-col col-8 text-center>
+        <button [disabled]="!addressForm.valid" type="submit" round ion-button>Add Address</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

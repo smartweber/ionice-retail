@@ -1,0 +1,56 @@
+<!--
+  Generated template for the MyItemsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="rt-blue">
+    <ion-title>SOLD</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only small color="royal" (tap)="info()">
+        <ion-icon name="ios-information-circle-outline">
+        </ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 color="rt-blue-c" text-center *ngIf="orders.length === 0">Oops, looks like you have not sold any items.</h4>
+
+  <ion-card *ngFor="let order of orders">
+    <ion-list >
+      <ion-list-header *ngIf="order.customer"><b>Buyer:</b> {{order.customer.name}}</ion-list-header>
+      <ion-list-header *ngIf="!order.customer"><b>Buyer:</b> {{order.ship_to_address.name}}</ion-list-header>
+      <ion-item *ngFor="let item of order.line_items">
+        <ion-avatar item-start>
+          <img [src]="item.thumbnail">
+        </ion-avatar>
+        <h2>{{item.title}}</h2>
+        <p>${{item.price}}</p>
+        <p *ngIf="item.tracking_numbers.length == 0">No tracking added yet</p>
+        <ion-note item-end>qty:{{item.qty}}</ion-note>
+      </ion-item>
+      <button ion-item (tap)="details(order)">
+        More Details
+      </button>
+    </ion-list>
+
+<!--     <ion-card-header>
+      <ion-row>
+        <ion-col>
+          {{order.order_id}}
+        </ion-col>
+        <ion-col>
+          Order placed on {{order.createdAt|date:'mediumDate'}}
+        </ion-col>
+      </ion-row>
+
+    </ion-card-header> -->
+  </ion-card>
+
+</ion-content>

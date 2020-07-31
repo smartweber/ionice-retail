@@ -14,4 +14,4 @@ $ ionic cordova build android
 
 //Projects will be under the platforms directory
 ```
-# ionice-retail
+# ionic-retail
